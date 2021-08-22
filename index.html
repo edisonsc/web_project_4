@@ -77,21 +77,24 @@
                 </li>
             </ul>
         </section>
+        <!--Pop up form is not functional or completely styled. Create a button block and refactor code. Latemar is listed twice in photo-grid-->
         <section class="popup">
-            <button><img src="./images/close-icon.png" alt="" class="close"></button>
-            <form action="" class="popup__form">
-                <h2 class="popup__heading">Edit profile</h2>
-                <input type="text" class="name" placeholder="Name">
-                <input type="text" class="title" placeholder="About me">
-                <button class="submit">Save</button>
+            <div class="popup__container">
+            <button class="popup__close-button"></button>
+            <h2 class="popup__heading">Edit profile</h2>
+            <form class="form">        
+                <input type="text" class="form__input form__input_name" id="input-name" placeholder="Name">
+                <input type="text" class="form__input form__input_title" id="input-title" placeholder="About me">
+                <button class="form__save-button">Save</button>
             </form>
+        </div>
         </section>
     </main>
     <footer class="footer">
         <p class="footer__text">&#169; 2021 Around The U.S.</p>
     </footer>
 
-    <script src="" async defer></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

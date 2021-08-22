@@ -1,11 +1,12 @@
-.popup__form{
+.popup__container{
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     background:#fff;
-    margin: 0 auto;
     border-radius: 10px;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-    width: 282px;
+    min-width: 282px;
     height: 322px;
     padding: 25px 22px;
+    position:relative;
 }
