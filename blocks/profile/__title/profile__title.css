@@ -5,3 +5,10 @@
     margin: 0;
     padding: 0;
 }
+
+@media screen and (min-width: 880px) {
+    .profile__title {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
