@@ -3,8 +3,8 @@
     border: 2px solid #fff;
     box-sizing: border-box;
     border-radius: 2px;
-    width: 282px;
-    height: 50px;
+    min-width: 282px;
+    min-height: 50px;
     margin: 36px 19px;
     background-image: url(../../../images/add-icon.png);
     background-position: center;
@@ -15,7 +15,7 @@
 @media screen and (min-width: 880px) {
     .profile__add-button {
      justify-self: end ;
-     max-width: 150px; 
+     min-width: 150px; 
     
     }
   }
