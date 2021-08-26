@@ -1,0 +1,9 @@
+.opacity__button{
+    opacity: 1;
+    transition: opacity .2s linear;
+}
+
+  .opacity__button:hover {
+    opacity: .8;
+  }
+  

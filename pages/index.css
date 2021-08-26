@@ -44,3 +44,7 @@
 @import url(../blocks/form/__input/_name/form__input_name.css);
 @import url(../blocks/form/__input/_title/form__input_title.css);
 @import url(../blocks/form/__save-button/form__save-button.css);
+
+/*Opacity*/
+@import url(../blocks/opacity/opacity.css);
+@import url(../blocks/opacity/__button/opacity__button.css);

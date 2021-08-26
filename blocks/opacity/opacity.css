@@ -1,0 +1,10 @@
+.opacity{
+    cursor:pointer;
+    opacity: 1;
+    transition: opacity .2s linear;
+}
+ 
+  .opacity:hover {
+    opacity: .6;
+  }
+  
