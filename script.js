@@ -35,9 +35,9 @@ function handleFormSubmit(evt) {
 
   profileName.textContent = nameInput.value;
   profileTitle.textContent = jobInput.value;
+
+  toggleModal();
 }
 
 //form eventlistener
 formElement.addEventListener('submit', handleFormSubmit);
-
-handleFormSubmit();
