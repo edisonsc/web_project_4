@@ -1,7 +1,13 @@
 .profile__area{
     display: flex; 
-    padding:0 0 14px 0;
+    flex-direction: column;
+    padding:0;
     margin: 0;
     align-items: center;
 }
 
+@media screen and (min-width: 880px){
+    .profile__area{
+        align-items: flex-start;
+    }
+}

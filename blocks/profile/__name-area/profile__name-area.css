@@ -1,0 +1,5 @@
+.profile__name-area{
+    display:flex;
+    padding:0 0 14px 0;    
+    align-items: center;
+}
