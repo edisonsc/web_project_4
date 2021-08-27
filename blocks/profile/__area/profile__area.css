@@ -8,6 +8,6 @@
 
 @media screen and (min-width: 880px){
     .profile__area{
-        align-items: flex-start
+        align-items: flex-start;
+        padding: 0 160px 0 10px;
     }
-}
