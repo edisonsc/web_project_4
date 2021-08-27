@@ -1,12 +1,11 @@
-.profile__name-area{
-    display:flex;
-    padding:26px 0 14px 0;    
-    align-items: center;
+.profile__name-area {
+  padding: 26px 0 14px 0;
+  text-align: center;
 }
 
 @media screen and (min-width: 880px) {
-    .profile__name-area {
-     padding:0;
-    }
+  .profile__name-area {
+    padding: 0 0 0 10px;
+    text-align: left;
   }
-  
+}
