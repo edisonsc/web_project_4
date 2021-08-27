@@ -3,6 +3,7 @@
   font-size: 22px;
   line-height: 27px;
   margin: 0;
+  padding: 0 0 14px;
   display: inline-block;
 }
 
@@ -10,5 +11,6 @@
   .profile__name {
     font-size: 42px;
     line-height: 48px;
+    padding-bottom: 16px;
   }
 }

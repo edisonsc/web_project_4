@@ -1,11 +1,11 @@
 .profile__name-area {
-  padding: 26px 0 14px 0;
+  padding: 26px 0 36px 0;
   text-align: center;
 }
 
 @media screen and (min-width: 880px) {
   .profile__name-area {
-    padding: 0 0 0 10px;
+    padding: 0 0 0 30px;
     text-align: left;
   }
 }
