@@ -3,6 +3,9 @@
 ### Overview
 This project uses HTML, CSS, JavaScript and BEM. The site is built from a design file in Figma. 
 
+**GitHub Pages**
+[Link to the project](https://edisonsc.github.io/web_project_4/)
+
 
 **Figma**
 
