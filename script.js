@@ -25,7 +25,7 @@ function toggleModal() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileTitle.textContent; 
   }
-  else {modal.classList.toggle('popup')}
+  else {modal.classList.toggle('popup_opened')};
 };
 
 //EventListener
