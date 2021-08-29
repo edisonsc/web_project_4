@@ -1,6 +1,9 @@
 .photo-grid__heart-icon{
  width: 21px;
  height: 19px;
+ background-image: url(../../../images/heart.svg);
+ border: none;
+ background-color: transparent;
 }
 
 .photo-grid__heart-icon:hover{
