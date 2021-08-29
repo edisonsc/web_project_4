@@ -2,3 +2,7 @@
  width: 21px;
  height: 19px;
 }
+
+.photo-grid__heart-icon:hover{
+ opacity: .5;
+}
