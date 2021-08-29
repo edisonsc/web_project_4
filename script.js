@@ -20,9 +20,12 @@ let formElement = document.querySelector(".form");// Use the querySelector() met
 //Functions
 //Adds intital values to modal and toggles open and close
 function toggleModal() {
-  modal.classList.toggle('popup_opened');
+  if (modal.classList.value === 'popup'){
+  modal.classList.toggle('popup_opened')
   nameInput.value = profileName.textContent;
   jobInput.value = profileTitle.textContent; 
+  }
+  else {modal.classList.toggle('popup')}
 };
 
 //EventListener
