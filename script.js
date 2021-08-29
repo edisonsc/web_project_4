@@ -1,7 +1,7 @@
 //Form input query selectors
 let modal = document.querySelector(".popup");
-let nameInput = document.querySelector(".form__input_name");
-let jobInput = document.querySelector(".form__input_title");
+let nameInput = document.querySelector(".form__input_type_name");
+let jobInput = document.querySelector(".form__input_type_title");
 let saveButton = document.querySelector(".form__save-button");
 
 //profile information query selectors
