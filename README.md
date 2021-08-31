@@ -16,9 +16,12 @@ The challenge for this project is a modal that opens on the edit button click an
 
 ```
 function toggleModal() {
-  modal.classList.toggle('popup_opened');
+  if (modal.classList.value === 'popup'){
+  modal.classList.toggle('popup_opened')
   nameInput.value = profileName.textContent;
   jobInput.value = profileTitle.textContent; 
+  }
+  else {modal.classList.toggle('popup_opened')};
 };
 ```
 

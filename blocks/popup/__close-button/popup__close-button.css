@@ -23,3 +23,7 @@
     right: -45px;
   }
 }
+
+.popup__close-button:hover{
+  opacity: .6;
+ }
