@@ -1,3 +1,49 @@
+//Initial card array
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  }
+]; 
+
+
+const cardTemplate = document.querySelector("#images").content;
+const cardList = document.querySelector(".photo-grid");
+
+
+
+initialCards.forEach((card) => {
+let cardElement = cardTemplate.querySelector(".photo-grid__card").cloneNode(true);
+cardElement.querySelector(".photo-grid__image").src = card.link;
+cardElement.querySelector(".photo-grid__title").textContent = card.name;
+
+cardList.append(cardElement);
+
+});
+
+
+
+
 //Form input query selectors
 let modal = document.querySelector(".popup");
 let nameInput = document.querySelector(".form__input_type_name");
