@@ -1,0 +1,17 @@
+.photo-grid__delete-icon {
+  width: 18px;
+  height: 18px;
+  background-image: url(../../../images/delete-icon.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  z-index: 1;
+}
+
+.photo-grid__delete-icon:hover {
+  opacity: 0.6;
+}
