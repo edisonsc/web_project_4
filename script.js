@@ -29,20 +29,18 @@ const initialCards = [
 
 const cardTemplate = document.querySelector("#images").content;
 const cardList = document.querySelector(".photo-grid");
+let cardImage = document.querySelector(".photo-grid__image");
+let cardTitle = document.querySelector(".photo-grid__title");
 
-
-
+//Populate page with cards from initialCards array
 initialCards.forEach((card) => {
 let cardElement = cardTemplate.querySelector(".photo-grid__card").cloneNode(true);
+
 cardElement.querySelector(".photo-grid__image").src = card.link;
 cardElement.querySelector(".photo-grid__title").textContent = card.name;
 
 cardList.append(cardElement);
-
 });
-
-
-
 
 //Form input query selectors
 let modal = document.querySelector(".popup");
@@ -63,8 +61,16 @@ let closeButton = document.querySelector(".popup__close-button")
 //form
 let formElement = document.querySelector(".form");// Use the querySelector() method
 
+//add button
+let addButton =document.querySelector(".profile__add-button")
+let createButton = document.querySelector(".form__create-button")
+
+//place information query selectors
+let placeInput = document.querySelector(".form__input_type_place");
+let linkInput = document.querySelector(".form__input_type_link");
+
 //Functions
-//Adds intital values to modal and toggles open and close
+//Adds intital values to profile modal and toggles open and close
 function toggleModal() {
   if (modal.classList.value === 'popup'){
   modal.classList.toggle('popup_opened')
@@ -75,6 +81,7 @@ function toggleModal() {
 };
 
 //EventListener
+addButton.addEventListener('click', toggleModal);
 editButton.addEventListener('click', toggleModal);
 closeButton.addEventListener('click', toggleModal);
 
@@ -90,3 +97,28 @@ function handleFormSubmit(evt) {
 
 //form eventlistener
 formElement.addEventListener('submit', handleFormSubmit);
+
+//Adds intital values to place modal
+function initPlace() {
+  placeInput.value = profileName.textContent;
+  linkInput.value = profileTitle.textContent; 
+};
+
+//EventListener
+
+addButton.addEventListener('click', initPlace);
+
+
+//form submit function
+function handlePlaceSubmit(evt) {
+  evt.preventDefault();
+
+  placeInput.textContent = cardTitle.textContent;
+  linkInput.textContent = cardImage.src;
+
+  cardList.prepend(evt);
+}
+
+//EventListener
+
+addButton.addEventListener('click', handlePlaceSubmit);
