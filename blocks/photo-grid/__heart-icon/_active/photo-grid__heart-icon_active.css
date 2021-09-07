@@ -1,0 +1,8 @@
+.photo-grid__heart-icon_active {
+  width: 21px;
+  height: 19px;
+  background-image: url(../../../../images/heart-fill.svg);
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}

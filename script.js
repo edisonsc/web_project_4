@@ -42,6 +42,7 @@ cardElement.querySelector(".photo-grid__title").textContent = card.name;
 cardList.append(cardElement);
 });
 
+
 //Form input query selectors
 let modal = document.querySelector(".popup");
 let nameInput = document.querySelector(".form__input_type_name");
@@ -122,3 +123,17 @@ function handlePlaceSubmit(evt) {
 //EventListener
 
 addButton.addEventListener('click', handlePlaceSubmit);
+
+
+//Heart fill function
+
+heart = document.querySelectorAll(".photo-grid__heart-icon");
+console.log(heart)
+heartFill = document.querySelectorAll(".photo-grid__heart-icon_active");
+console.log(heartFill)
+
+
+//EventListener
+addButton.addEventListener('click', toggleModal);
+editButton.addEventListener('click', toggleModal);
+closeButton.addEventListener('click', toggleModal);
