@@ -23,23 +23,27 @@ const initialCards = [
   {
     name: "Lago di Braies",
     link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  },
+  {
+    name: "Mt. Ranier",
+    link: "https://images.unsplash.com/photo-1568226292321-dd67ff8b3b2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80"
   }
-]; 
+];
 
-
-const cardTemplate = document.querySelector("#images").content;
+const cardTemplate = document.querySelector("#cardTemplate").content;
 const cardList = document.querySelector(".photo-grid");
 let cardImage = document.querySelector(".photo-grid__image");
 let cardTitle = document.querySelector(".photo-grid__title");
 
 //Populate page with cards from initialCards array
 initialCards.forEach((card) => {
-let cardElement = cardTemplate.querySelector(".photo-grid__card").cloneNode(true);
-
-cardElement.querySelector(".photo-grid__image").src = card.link;
-cardElement.querySelector(".photo-grid__title").textContent = card.name;
-
-cardList.append(cardElement);
+  let cardElement = cardTemplate.querySelector(".photo-grid__card").cloneNode(true);
+  //set card image
+  cardElement.querySelector(".photo-grid__image").src = card.link;
+  //set card title
+  cardElement.querySelector(".photo-grid__title").textContent = card.name;
+  //append to list
+  cardList.append(cardElement);
 });
 
 
@@ -56,14 +60,14 @@ let profileTitle = document.querySelector(".profile__title");
 //edit button query selector
 let editButton = document.querySelector(".profile__edit-button");
 
-//edit button query selector
+//close button query selector
 let closeButton = document.querySelector(".popup__close-button")
 
 //form
 let formElement = document.querySelector(".form");// Use the querySelector() method
 
 //add button
-let addButton =document.querySelector(".profile__add-button")
+let addButton = document.querySelector(".profile__add-button")
 let createButton = document.querySelector(".form__create-button")
 
 //place information query selectors
@@ -73,12 +77,12 @@ let linkInput = document.querySelector(".form__input_type_link");
 //Functions
 //Adds intital values to profile modal and toggles open and close
 function toggleModal() {
-  if (modal.classList.value === 'popup'){
-  modal.classList.toggle('popup_opened')
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileTitle.textContent; 
+  if (modal.classList.value === 'popup') {
+    modal.classList.toggle('popup_opened')
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileTitle.textContent;
   }
-  else {modal.classList.toggle('popup_opened')};
+  else { modal.classList.toggle('popup_opened') };
 };
 
 //EventListener
@@ -102,7 +106,7 @@ formElement.addEventListener('submit', handleFormSubmit);
 //Adds intital values to place modal
 function initPlace() {
   placeInput.value = profileName.textContent;
-  linkInput.value = profileTitle.textContent; 
+  linkInput.value = profileTitle.textContent;
 };
 
 //EventListener
