@@ -30,6 +30,7 @@ const initialCards = [
   }
 ];
 
+//Select card template and content
 const cardTemplate = document.querySelector("#cardTemplate").content;
 const cardList = document.querySelector(".photo-grid");
 let cardImage = document.querySelector(".photo-grid__image");
@@ -46,75 +47,73 @@ initialCards.forEach((card) => {
   cardList.append(cardElement);
 });
 
-
-//Form input query selectors
-let modal = document.querySelector(".popup");
+//Edit form query selectors
+let editModal = document.querySelector(".popup_type_edit");
+let editForm = editModal.querySelector(".form");
 let nameInput = document.querySelector(".form__input_type_name");
 let jobInput = document.querySelector(".form__input_type_title");
-let saveButton = document.querySelector(".form__save-button");
 
 //profile information query selectors
 let profileName = document.querySelector(".profile__name");
 let profileTitle = document.querySelector(".profile__title");
 
-//edit button query selector
-let editButton = document.querySelector(".profile__edit-button");
-
-//close button query selector
-let closeButton = document.querySelector(".popup__close-button")
-
-//form
-let formElement = document.querySelector(".form");// Use the querySelector() method
-
-//add button
-let addButton = document.querySelector(".profile__add-button")
-let createButton = document.querySelector(".form__create-button")
-
-//place information query selectors
+//Add form query selectors
+let addModal = document.querySelector(".popup_type_add");
+let addForm = addModal.querySelector(".form");
 let placeInput = document.querySelector(".form__input_type_place");
 let linkInput = document.querySelector(".form__input_type_link");
 
+//place information query selectors
+//let placeName = document.querySelector(".");
+//let linkName = document.querySelector(".");
+
+//button selectors
+let editButton = document.querySelector(".profile__edit-button");
+let saveButton = document.querySelector("#save-button");
+let addButton = document.querySelector(".profile__add-button")
+let createButton = document.querySelector("#create-button")
+let editModalClose = editModal.querySelector(".popup__close-button");
+let addModalClose = addModal.querySelector(".popup__close-button");
+
 //Functions
-//Adds intital values to profile modal and toggles open and close
-function toggleModal() {
-  if (modal.classList.value === 'popup') {
-    modal.classList.toggle('popup_opened')
+//Adds initial values to profile edit modal
+function prefillEditForm(){
+  if (editModal.classList.contains('popup')){
     nameInput.value = profileName.textContent;
     jobInput.value = profileTitle.textContent;
   }
-  else { modal.classList.toggle('popup_opened') };
+}
+//Toggles all modals open and close
+function toggleModal(modalWindow) {
+ modalWindow.classList.toggle('popup_opened');
 };
 
-//EventListener
-addButton.addEventListener('click', toggleModal);
-editButton.addEventListener('click', toggleModal);
-closeButton.addEventListener('click', toggleModal);
+//Adds initial values to new place modal
 
-//form submit function
-function handleFormSubmit(evt) {
+//Event listeners
+addButton.addEventListener('click', () => {
+  toggleModal(addModal);
+});
+addModalClose.addEventListener('click', () => toggleModal(addModal));
+createButton.addEventListener('click', () => toggleModal(addModal));
+
+editButton.addEventListener('click', () => {
+  prefillEditForm();
+  toggleModal(editModal);
+});
+editModalClose.addEventListener('click', () => toggleModal(editModal));
+saveButton.addEventListener('click', () => toggleModal(editModal));
+
+//Edit form submit function
+function editFormSubmit(evt) {
   evt.preventDefault();
-
   profileName.textContent = nameInput.value;
   profileTitle.textContent = jobInput.value;
-
-  toggleModal();
 }
+//Edit form eventlistener
+editForm.addEventListener('submit', editFormSubmit);
 
-//form eventlistener
-formElement.addEventListener('submit', handleFormSubmit);
-
-//Adds intital values to place modal
-function initPlace() {
-  placeInput.value = profileName.textContent;
-  linkInput.value = profileTitle.textContent;
-};
-
-//EventListener
-
-addButton.addEventListener('click', initPlace);
-
-
-//form submit function
+//Place form submit function
 function handlePlaceSubmit(evt) {
   evt.preventDefault();
 
@@ -126,7 +125,7 @@ function handlePlaceSubmit(evt) {
 
 //EventListener
 
-addButton.addEventListener('click', handlePlaceSubmit);
+addForm.addEventListener('submit', handlePlaceSubmit);
 
 
 //Heart fill function
@@ -135,9 +134,3 @@ heart = document.querySelectorAll(".photo-grid__heart-icon");
 console.log(heart)
 heartFill = document.querySelectorAll(".photo-grid__heart-icon_active");
 console.log(heartFill)
-
-
-//EventListener
-addButton.addEventListener('click', toggleModal);
-editButton.addEventListener('click', toggleModal);
-closeButton.addEventListener('click', toggleModal);
