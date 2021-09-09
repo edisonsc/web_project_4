@@ -49,18 +49,13 @@ let addForm = addModal.querySelector(".form");
 let placeInput = document.querySelector(".form__input_type_place");
 let linkInput = document.querySelector(".form__input_type_link");
 
-//place information query selectors
-//let placeName = document.querySelector(".");
-//let linkName = document.querySelector(".");
-
 //button selectors
 let editButton = document.querySelector(".profile__edit-button");
-let saveButton = document.querySelector("#save-button");
-let addButton = document.querySelector(".profile__add-button")
-let createButton = document.querySelector("#create-button")
 let editModalClose = editModal.querySelector(".popup__close-button");
+let saveButton = document.querySelector("#save-button");
+let addButton = document.querySelector(".profile__add-button");
 let addModalClose = addModal.querySelector(".popup__close-button");
-let deleteButton = document.querySelector(".photo-grid__delete-icon");
+let createButton = document.querySelector("#create-button");
 
 //Functions
 //Adds initial values to profile edit modal
@@ -88,7 +83,6 @@ editButton.addEventListener('click', () => {
 });
 editModalClose.addEventListener('click', () => toggleModal(editModal));
 saveButton.addEventListener('click', () => toggleModal(editModal));
-
 //Edit form submit function
 function editFormSubmit(evt) {
   evt.preventDefault();
@@ -105,7 +99,12 @@ function createNewCard(card){
   cardElement.querySelector(".photo-grid__image").src = card.link;
   //set card title
   cardElement.querySelector(".photo-grid__title").textContent = card.name;
-  //append to list
+  //set delete icon
+  let deleteButton = cardElement.querySelector(".photo-grid__delete-icon");
+  //set like button
+  let likeButton = cardElement.querySelector(".photo-grid__heart-icon");
+  likeButton.addEventListener('click', handleLikeCard);
+ //append to list
   return cardElement;
 };
 
@@ -132,9 +131,7 @@ initialCards.forEach((card) => {
   cardList.append(cardElement)
 });
 
-//Heart fill function
+function handleLikeCard(evt){
+  evt.target.classList.toggle('photo-grid__heart-icon_active');
+}
 
-heart = document.querySelectorAll(".photo-grid__heart-icon");
-console.log(heart)
-heartFill = document.querySelectorAll(".photo-grid__heart-icon_active");
-console.log(heartFill)
