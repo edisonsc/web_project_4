@@ -101,6 +101,7 @@ function createNewCard(card){
   cardElement.querySelector(".photo-grid__title").textContent = card.name;
   //set delete icon
   let deleteButton = cardElement.querySelector(".photo-grid__delete-icon");
+  deleteButton.addEventListener('click', handleRemoveCard);
   //set like button
   let likeButton = cardElement.querySelector(".photo-grid__heart-icon");
   likeButton.addEventListener('click', handleLikeCard);
@@ -135,3 +136,7 @@ function handleLikeCard(evt){
   evt.target.classList.toggle('photo-grid__heart-icon_active');
 }
 
+function handleRemoveCard(evt){ 
+    const item = evt.target.closest(".photo-grid__card");
+    item.remove()
+  };
