@@ -23,10 +23,6 @@ const initialCards = [
   {
     name: "Lago di Braies",
     link: "https://code.s3.yandex.net/web-code/lago.jpg"
-  },
-  {
-    name: "Mt. Ranier",
-    link: "https://images.unsplash.com/photo-1568226292321-dd67ff8b3b2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80"
   }
 ];
 
@@ -36,16 +32,6 @@ const cardList = document.querySelector(".photo-grid");
 let cardImage = document.querySelector(".photo-grid__image");
 let cardTitle = document.querySelector(".photo-grid__title");
 
-//Populate page with cards from initialCards array
-initialCards.forEach((card) => {
-  let cardElement = cardTemplate.querySelector(".photo-grid__card").cloneNode(true);
-  //set card image
-  cardElement.querySelector(".photo-grid__image").src = card.link;
-  //set card title
-  cardElement.querySelector(".photo-grid__title").textContent = card.name;
-  //append to list
-  cardList.append(cardElement);
-});
 
 //Edit form query selectors
 let editModal = document.querySelector(".popup_type_edit");
@@ -74,6 +60,7 @@ let addButton = document.querySelector(".profile__add-button")
 let createButton = document.querySelector("#create-button")
 let editModalClose = editModal.querySelector(".popup__close-button");
 let addModalClose = addModal.querySelector(".popup__close-button");
+let deleteButton = document.querySelector(".photo-grid__delete-icon");
 
 //Functions
 //Adds initial values to profile edit modal
@@ -87,8 +74,6 @@ function prefillEditForm(){
 function toggleModal(modalWindow) {
  modalWindow.classList.toggle('popup_opened');
 };
-
-//Adds initial values to new place modal
 
 //Event listeners
 addButton.addEventListener('click', () => {
@@ -113,20 +98,39 @@ function editFormSubmit(evt) {
 //Edit form eventlistener
 editForm.addEventListener('submit', editFormSubmit);
 
+//Create new card
+function createNewCard(card){
+  let cardElement = cardTemplate.querySelector(".photo-grid__card").cloneNode(true);
+  //set card image
+  cardElement.querySelector(".photo-grid__image").src = card.link;
+  //set card title
+  cardElement.querySelector(".photo-grid__title").textContent = card.name;
+  //append to list
+  return cardElement;
+};
+
 //Place form submit function
 function handlePlaceSubmit(evt) {
   evt.preventDefault();
-
-  placeInput.textContent = cardTitle.textContent;
-  linkInput.textContent = cardImage.src;
-
-  cardList.prepend(evt);
-}
+  let card = {
+    name: placeInput.value,
+    link: linkInput.value,
+  }
+  let cardElement = createNewCard(card);
+  cardList.prepend(cardElement);
+  placeInput.value = "";
+  linkInput.value = "";
+ }
 
 //EventListener
-
 addForm.addEventListener('submit', handlePlaceSubmit);
 
+//Populate page with cards from initialCards array
+initialCards.forEach((card) => {
+  cardElement = createNewCard(card);
+  //append to list
+  cardList.append(cardElement)
+});
 
 //Heart fill function
 
