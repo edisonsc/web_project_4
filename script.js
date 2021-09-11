@@ -49,6 +49,12 @@ let addForm = addModal.querySelector(".form");
 let placeInput = document.querySelector(".form__input_type_place");
 let linkInput = document.querySelector(".form__input_type_link");
 
+//Preview query selectors
+let previewModal = document.querySelector(".popup_type_preview");
+let previewImage = document.querySelector(".popup__image");
+let previewCaption = document.querySelector(".popup__caption");
+let previewModalClose = previewModal.querySelector(".popup__close-button");
+
 //button selectors
 let editButton = document.querySelector(".profile__edit-button");
 let editModalClose = editModal.querySelector(".popup__close-button");
@@ -57,25 +63,28 @@ let addButton = document.querySelector(".profile__add-button");
 let addModalClose = addModal.querySelector(".popup__close-button");
 let createButton = document.querySelector("#create-button");
 
-//Functions
-//Adds initial values to profile edit modal
+//Toggles all modals open and close
+function toggleModal(modalWindow) {
+  modalWindow.classList.toggle('popup_opened');
+ };
+
+//Edit Form Profile 
+//Adds initial values of name and job title to profile edit modal
 function prefillEditForm(){
   if (editModal.classList.contains('popup')){
     nameInput.value = profileName.textContent;
     jobInput.value = profileTitle.textContent;
   }
 }
-//Toggles all modals open and close
-function toggleModal(modalWindow) {
- modalWindow.classList.toggle('popup_opened');
-};
 
-//Event listeners
-addButton.addEventListener('click', () => {
-  toggleModal(addModal);
-});
-addModalClose.addEventListener('click', () => toggleModal(addModal));
-createButton.addEventListener('click', () => toggleModal(addModal));
+//Submits new information to edit profile
+function editFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileTitle.textContent = jobInput.value;
+}
+//Event listeners for edit form
+editForm.addEventListener('submit', editFormSubmit);
 
 editButton.addEventListener('click', () => {
   prefillEditForm();
@@ -83,20 +92,23 @@ editButton.addEventListener('click', () => {
 });
 editModalClose.addEventListener('click', () => toggleModal(editModal));
 saveButton.addEventListener('click', () => toggleModal(editModal));
-//Edit form submit function
-function editFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileTitle.textContent = jobInput.value;
-}
-//Edit form eventlistener
-editForm.addEventListener('submit', editFormSubmit);
+
+//Image preview
+function handleImagePreview(card){
+  previewImage.src = card.link;
+  previewCaption.textContent = card.name;
+  toggleModal(previewModal);
+  }
+  
+  //preview modal event listeners
+  previewModalClose.addEventListener('click', () => toggleModal(previewModal));
 
 //Create new card
 function createNewCard(card){
   let cardElement = cardTemplate.querySelector(".photo-grid__card").cloneNode(true);
   //set card image
-  cardElement.querySelector(".photo-grid__image").src = card.link;
+  let cardImage = cardElement.querySelector(".photo-grid__image");
+  cardImage.src = card.link;
   //set card title
   cardElement.querySelector(".photo-grid__title").textContent = card.name;
   //set delete icon
@@ -105,10 +117,23 @@ function createNewCard(card){
   //set like button
   let likeButton = cardElement.querySelector(".photo-grid__heart-icon");
   likeButton.addEventListener('click', handleLikeCard);
+  //set image
+  cardImage.addEventListener('click', () => handleImagePreview(card));
  //append to list
   return cardElement;
 };
 
+//Like a card
+function handleLikeCard(evt){
+  evt.target.classList.toggle('photo-grid__heart-icon_active');
+}
+//Remove a card
+function handleRemoveCard(evt){ 
+    const item = evt.target.closest(".photo-grid__card");
+    item.remove()
+  };
+
+//Add a new place to cards 
 //Place form submit function
 function handlePlaceSubmit(evt) {
   evt.preventDefault();
@@ -122,21 +147,18 @@ function handlePlaceSubmit(evt) {
   linkInput.value = "";
  }
 
-//EventListener
+//Add form EventListener
 addForm.addEventListener('submit', handlePlaceSubmit);
+addButton.addEventListener('click', () => {
+  toggleModal(addModal);
+});
+addModalClose.addEventListener('click', () => toggleModal(addModal));
+createButton.addEventListener('click', () => toggleModal(addModal));
 
+//Actions
 //Populate page with cards from initialCards array
 initialCards.forEach((card) => {
   cardElement = createNewCard(card);
   //append to list
   cardList.append(cardElement)
 });
-
-function handleLikeCard(evt){
-  evt.target.classList.toggle('photo-grid__heart-icon_active');
-}
-
-function handleRemoveCard(evt){ 
-    const item = evt.target.closest(".photo-grid__card");
-    item.remove()
-  };

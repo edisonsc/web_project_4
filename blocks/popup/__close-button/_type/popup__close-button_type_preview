@@ -1,0 +1,12 @@
+.popup__close-button_type_preview {
+  margin:0;
+
+}
+
+@media screen and (min-width: 880px) {
+  .popup__close-button_type_preview {
+   
+    margin:0;
+  }
+}
+
