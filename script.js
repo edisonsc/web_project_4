@@ -140,7 +140,7 @@ function handleRemoveCard(evt){
 //Place form submit function
 function handlePlaceSubmit(evt) {
   evt.preventDefault();
-  const card = {
+  let card = {
     name: placeInput.value,
     link: linkInput.value,
   }
