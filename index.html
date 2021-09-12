@@ -34,19 +34,18 @@
             <button aria-label="add" type="button" class="profile__add-button opacity"></button>
         </section>
         <section class="images">
-            
-            <ul class="photo-grid">              
-              
-            </ul>       
-        
+            <ul class="photo-grid">
+            </ul>
         </section>
         <section class="popup popup_type_edit">
             <div class="popup__container">
                 <button aria-label="close" type="button" class="popup__close-button opacity"></button>
                 <h2 class="popup__heading">Edit profile</h2>
                 <form class="form" name="editInformation">
-                    <input type="text" class="form__input form__input_type_name" id="input-name" name="input-name" placeholder="Name">
-                    <input type="text" class="form__input form__input_type_title" id="input-title" name="input-title" placeholder="About me">
+                    <input type="text" class="form__input form__input_type_name" id="input-name" name="input-name"
+                        placeholder="Name">
+                    <input type="text" class="form__input form__input_type_title" id="input-title" name="input-title"
+                        placeholder="About me">
                     <button type="submit" class="form__button opacity" id="save-button">Save</button>
                 </form>
             </div>
@@ -56,16 +55,19 @@
                 <button aria-label="close" type="button" class="popup__close-button opacity"></button>
                 <h2 class="popup__heading">New Place</h2>
                 <form class="form" name="editPlace">
-                    <input type="text" class="form__input form__input_type_place" id="place-name" name="place-name" placeholder="Title">
-                    <input type="text" class="form__input form__input_type_link" id="place-link" name="place-link" placeholder="Image link">
+                    <input type="text" class="form__input form__input_type_place" id="place-name" name="place-name"
+                        placeholder="Title">
+                    <input type="text" class="form__input form__input_type_link" id="place-link" name="place-link"
+                        placeholder="Image link">
                     <button type="submit" class="form__button opacity" id="create-button">Create</button>
                 </form>
             </div>
         </section>
         <section class="popup popup_type_preview">
             <div class="popup__container popup__container_type_preview">
-                <button aria-label="close" type="button" class="popup__close-button popup__close-button_type_preview opacity"></button>
-                <img src="" alt="" class="popup__image">
+                <button aria-label="close" type="button"
+                    class="popup__close-button popup__close-button_type_preview opacity"></button>
+                <img class="popup__image">
                 <h2 class="popup__caption"></h2>
             </div>
         </section>
@@ -74,15 +76,15 @@
         <p class="footer__text">&#169; 2021 Around The U.S.</p>
     </footer>
     <template id="cardTemplate">
-    <li class="photo-grid__card">
-        <button aria-label="delete" type="button" class="photo-grid__delete-icon"></button>
-        <img class="photo-grid__image">
-        <div class="photo-grid__content">
-            <h2 class="photo-grid__title"></h2>
-            <button aria-label="like" type="button" id="like" class="photo-grid__heart-icon opacity"></button>
-        </div>
-    </li>
-</template>
+        <li class="photo-grid__card">
+            <button aria-label="delete" type="button" class="photo-grid__delete-icon"></button>
+            <img class="photo-grid__image">
+            <div class="photo-grid__content">
+                <h2 class="photo-grid__title"></h2>
+                <button aria-label="like" type="button" id="like" class="photo-grid__heart-icon opacity"></button>
+            </div>
+        </li>
+    </template>
     <script src="./script.js"></script>
 </body>
 
