@@ -74,8 +74,8 @@ function closeModal(modalWindow) {
 //Edit Form Profile
 //Adds initial values of name and job title to profile edit modal
 function prefillEditForm() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileTitle.textContent;
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileTitle.textContent;
 }
 
 //Submits new information to edit profile
