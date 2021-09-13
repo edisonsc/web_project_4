@@ -61,18 +61,21 @@ const addButton = document.querySelector(".profile__add-button");
 const addModalClose = addModal.querySelector(".popup__close-button");
 const createButton = document.querySelector("#create-button");
 
-//Toggles all modals open and close
-function toggleModal(modalWindow) {
-  modalWindow.classList.toggle("popup_opened");
+//Opens modal
+function openModal(modalWindow) {
+  modalWindow.classList.add("popup_opened");
+}
+
+//Closes modal
+function closeModal(modalWindow) {
+  modalWindow.classList.remove("popup_opened");
 }
 
 //Edit Form Profile
 //Adds initial values of name and job title to profile edit modal
 function prefillEditForm() {
-  if (editModal.classList.contains("popup")) {
     nameInput.value = profileName.textContent;
     jobInput.value = profileTitle.textContent;
-  }
 }
 
 //Submits new information to edit profile
@@ -84,12 +87,11 @@ function editFormSubmit(evt) {
 //Event listeners for edit form
 editForm.addEventListener("submit", editFormSubmit);
 
-editButton.addEventListener("click", () => {
-  prefillEditForm();
-  toggleModal(editModal);
-});
-editModalClose.addEventListener("click", () => toggleModal(editModal));
-saveButton.addEventListener("click", () => toggleModal(editModal));
+editButton.addEventListener("click", prefillEditForm);
+editButton.addEventListener("click", () => openModal(editModal));
+
+editModalClose.addEventListener("click", () => closeModal(editModal));
+saveButton.addEventListener("click", () => closeModal(editModal));
 
 //Image preview
 function handleImagePreview(card) {
@@ -97,11 +99,11 @@ function handleImagePreview(card) {
   previewImage.alt = card.name;
   previewCaption.textContent = card.name;
 
-  toggleModal(previewModal);
+  openModal(previewModal);
 }
 
 //preview modal event listeners
-previewModalClose.addEventListener("click", () => toggleModal(previewModal));
+previewModalClose.addEventListener("click", () => closeModal(previewModal));
 
 //Create new card
 function createNewCard(card) {
@@ -134,14 +136,14 @@ function handleLikeCard(evt) {
 //Remove a card
 function handleRemoveCard(evt) {
   const item = evt.target.closest(".photo-grid__card");
-  item.remove();
+  item.remove(null);
 }
 
 //Add a new place to cards
 //Place form submit function
 function handlePlaceSubmit(evt) {
   evt.preventDefault();
-  let card = {
+  const card = {
     name: placeInput.value,
     link: linkInput.value,
   };
@@ -154,10 +156,10 @@ function handlePlaceSubmit(evt) {
 //Add form EventListener
 addForm.addEventListener("submit", handlePlaceSubmit);
 addButton.addEventListener("click", () => {
-  toggleModal(addModal);
+  openModal(addModal);
 });
-addModalClose.addEventListener("click", () => toggleModal(addModal));
-createButton.addEventListener("click", () => toggleModal(addModal));
+addModalClose.addEventListener("click", () => closeModal(addModal));
+createButton.addEventListener("click", () => closeModal(addModal));
 
 //Actions
 //Populate page with cards from initialCards array
