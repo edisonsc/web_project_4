@@ -61,6 +61,7 @@ const addButton = document.querySelector(".profile__add-button");
 const addModalClose = addModal.querySelector(".popup__close-button");
 const createButton = document.querySelector("#create-button");
 
+//Functions
 //Opens modal
 function openModal(modalWindow) {
   modalWindow.classList.add("popup_opened");
@@ -84,6 +85,7 @@ function editFormSubmit(evt) {
   profileName.textContent = nameInput.value;
   profileTitle.textContent = jobInput.value;
 }
+
 //Event listeners for edit form
 editForm.addEventListener("submit", editFormSubmit);
 
@@ -105,9 +107,21 @@ function handleImagePreview(card) {
 //preview modal event listeners
 previewModalClose.addEventListener("click", () => closeModal(previewModal));
 
+
+//Like a card
+function handleLikeCard(evt) {
+  evt.target.classList.toggle("photo-grid__heart-icon_active");
+}
+//Remove a card
+function handleRemoveCard(evt) {
+  let item = evt.target.closest(".photo-grid__card");
+  item.remove();
+  item = null;
+}
+
 //Create new card
 function createNewCard(card) {
-  let cardElement = cardTemplate
+  const cardElement = cardTemplate
     .querySelector(".photo-grid__card")
     .cloneNode(true);
   //set card image
@@ -129,16 +143,6 @@ function createNewCard(card) {
   return cardElement;
 }
 
-//Like a card
-function handleLikeCard(evt) {
-  evt.target.classList.toggle("photo-grid__heart-icon_active");
-}
-//Remove a card
-function handleRemoveCard(evt) {
-  const item = evt.target.closest(".photo-grid__card");
-  item.remove(null);
-}
-
 //Add a new place to cards
 //Place form submit function
 function handlePlaceSubmit(evt) {
@@ -147,7 +151,7 @@ function handlePlaceSubmit(evt) {
     name: placeInput.value,
     link: linkInput.value,
   };
-  let cardElement = createNewCard(card);
+  const cardElement = createNewCard(card);
   cardList.prepend(cardElement);
   placeInput.value = "";
   linkInput.value = "";
