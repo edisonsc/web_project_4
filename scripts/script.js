@@ -153,8 +153,7 @@ function handlePlaceSubmit(evt) {
   };
   const cardElement = createNewCard(card);
   cardList.prepend(cardElement);
-  placeInput.value = "";
-  linkInput.value = "";
+  document.getElementById('editPlace').reset();
 }
 
 //Add form EventListener
