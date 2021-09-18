@@ -168,7 +168,7 @@ createButton.addEventListener("click", () => closeModal(addModal));
 //Actions
 //Populate page with cards from initialCards array
 initialCards.forEach((card) => {
-  cardElement = createNewCard(card);
+  const cardElement = createNewCard(card);
   //append to list
   cardList.append(cardElement);
 });
