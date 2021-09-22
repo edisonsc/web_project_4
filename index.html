@@ -44,8 +44,10 @@
                 <form class="form" name="editInformation" novalidate>
                     <input type="text" class="form__input form__input_type_name" id="input-name" name="input-name"
                         placeholder="Name" required>
+                        <span class="form__error"id="profile-name-error"></span>
                     <input type="text" class="form__input form__input_type_title" id="input-title" name="input-title"
                         placeholder="About me" required>
+                        <span class="form__error"id="profile-title-error"></span>
                     <button type="submit" class="form__button opacity" id="save-button">Save</button>
                 </form>
             </div>
@@ -57,10 +59,12 @@
                 <form class="form" name="editPlace" id="editPlace">
                     <input type="text" class="form__input form__input_type_place" id="place-name" name="place-name"
                         placeholder="Title" required>
+                        <span class="form__error"id="place-name-error"></span>
                     <input type="text" class="form__input form__input_type_link" id="place-link" name="place-link"
                         placeholder="Image link" required>
                     <button type="submit" class="form__button opacity" id="create-button">Create</button>
                 </form>
+                <span class="form__error"id="place-link-error"></span>
             </div>
         </section>
         <section class="popup popup_type_preview">
