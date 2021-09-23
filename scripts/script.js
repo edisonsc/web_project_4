@@ -164,6 +164,15 @@ addButton.addEventListener("click", () => {
 addModalClose.addEventListener("click", () => closeModal(addModal));
 createButton.addEventListener("click", () => closeModal(addModal));
 
+//event listener for esc key close modals
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === "Escape") {
+    closeModal(addModal);
+    closeModal(previewModal);
+    closeModal(editModal)
+  }
+});
+
 //Actions
 //Populate page with cards from initialCards array
 initialCards.forEach((card) => {
@@ -171,3 +180,5 @@ initialCards.forEach((card) => {
   //append to list
   cardList.append(cardElement);
 });
+
+
