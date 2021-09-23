@@ -166,12 +166,20 @@ createButton.addEventListener("click", () => closeModal(addModal));
 
 //event listener for esc key close modals
 document.addEventListener('keydown', function (evt) {
-  if (evt.key === "Escape") {
-    closeModal(addModal);
-    closeModal(previewModal);
-    closeModal(editModal)
+  const modalWindow = document.querySelector(".popup_opened");
+  if (evt.key === "Escape" && modalWindow) {
+    closeModal(modalWindow)
   }
 });
+
+//event listener for overlay click to close modals
+document.addEventListener('click', function (evt) {
+  const modalWindow = document.querySelector(".popup_opened")
+  if (evt.target === modalWindow) {
+    closeModal(modalWindow)
+  }
+});
+
 
 //Actions
 //Populate page with cards from initialCards array
