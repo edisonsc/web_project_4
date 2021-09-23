@@ -61,10 +61,11 @@
                         placeholder="Title" minlength="1" maxlength="30"required>
                         <span class="form__error" id="place-name-error"></span>
                     <input type="url" class="form__input form__input_type_link" id="place-link" name="place-link"
-                        placeholder="Image link"  required>
-                    <button type="submit" class="form__button form__button_disabled opacity" id="create-button">Create</button>
+                        placeholder="Image link"  required><span class="form__error"id="place-link-error"></span>
+                        
+                    <button type="submit" class="form__button form__button_disabled opacity" id="create-button" disabled>Create</button>
                 </form>
-                <span class="form__error"id="place-link-error"></span>
+                
             </div>
         </section>
         <section class="popup popup_type_preview">
