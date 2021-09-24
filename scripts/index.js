@@ -63,29 +63,37 @@ const addModalClose = addModal.querySelector(".popup__close-button");
 const createButton = document.querySelector("#create-button");
 
 //Functions
-//Opens modal 
-function openModal(modalWindow) {
-  modalWindow.classList.add("popup_opened");
-  //event listener for esc key close modals
-  document.addEventListener('keydown', function (evt) {
-  if (evt.key === "Escape") {
-    closeModal(modalWindow);
-    document.removeEventListener('keydown', closeModal)
-  }
-});
-//event listener for close on overlay click
-document.addEventListener('click', function (evt) {
-  if (evt.target === modalWindow) {
-    closeModal(modalWindow)
-  };
-  document.removeEventListener('click', closeModal)
-});
-}
 
 //Closes modal
 function closeModal(modalWindow) {
   modalWindow.classList.remove("popup_opened");
-}
+};
+
+//closes modal on escape
+function escapeModal(modalWindow) {
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === "Escape") {
+      closeModal(modalWindow);
+      document.removeEventListener('keydown', closeModal)
+    }
+  })
+};
+//closes modal on overlay click
+function closeOverlay(modalWindow) {
+  document.addEventListener('click', function (evt) {
+    if (evt.target === modalWindow) {
+      closeModal(modalWindow)
+      document.removeEventListener('click', closeModal)
+    }
+  })
+};
+
+//Opens modal 
+function openModal(modalWindow) {
+  modalWindow.classList.add("popup_opened");
+  escapeModal(modalWindow);
+  closeOverlay(modalWindow);
+};
 
 //Edit Form Profile
 //Adds initial values of name and job title to profile edit modal

@@ -1,3 +1,6 @@
+const resetForm = () => {
+}
+
 const isValid = (inputElement) => {
     return inputElement.validity.valid;
 }
