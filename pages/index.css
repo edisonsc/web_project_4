@@ -49,6 +49,7 @@
 
 /*Form*/
 @import url(../blocks/form/form.css);
+@import url(../blocks/form/__label/form__label.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__input/_type/form__input_type_name.css);
 @import url(../blocks/form/__input/_type/form__input_type_title.css);
