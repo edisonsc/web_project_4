@@ -1,11 +1,10 @@
-.form__label{
-    position: relative;
-    margin: 0 0 30px;   
+.form__label {
+  position: relative;
+  margin: 0 0 30px;
 }
 
 @media screen and (min-width: 880px) {
-    .form__label {
-      margin-bottom: 39px;
-    }
+  .form__label {
+    margin-bottom: 39px;
   }
-  
+}
