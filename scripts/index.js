@@ -62,9 +62,23 @@ const addModalClose = addModal.querySelector(".popup__close-button");
 const createButton = document.querySelector("#create-button");
 
 //Functions
-//Opens modal
+//Opens modal 
 function openModal(modalWindow) {
   modalWindow.classList.add("popup_opened");
+  //event listener for esc key close modals
+  document.addEventListener('keydown', function (evt) {
+  if (evt.key === "Escape") {
+    closeModal(modalWindow);
+    document.removeEventListener('keydown', closeModal)
+  }
+});
+//event listener for close on overlay click
+document.addEventListener('click', function (evt) {
+  if (evt.target === modalWindow) {
+    closeModal(modalWindow)
+  };
+  document.removeEventListener('click', closeModal)
+});
 }
 
 //Closes modal
@@ -163,23 +177,6 @@ addButton.addEventListener("click", () => {
 });
 addModalClose.addEventListener("click", () => closeModal(addModal));
 createButton.addEventListener("click", () => closeModal(addModal));
-
-//event listener for esc key close modals
-document.addEventListener('keydown', function (evt) {
-  const modalWindow = document.querySelector(".popup_opened");
-  if (evt.key === "Escape" && modalWindow) {
-    closeModal(modalWindow)
-  }
-});
-
-//event listener for overlay click to close modals
-document.addEventListener('click', function (evt) {
-  const modalWindow = document.querySelector(".popup_opened")
-  if (evt.target === modalWindow) {
-    closeModal(modalWindow)
-  }
-});
-
 
 //Actions
 //Populate page with cards from initialCards array
