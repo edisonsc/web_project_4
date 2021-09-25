@@ -64,35 +64,34 @@ const createButton = document.querySelector("#create-button");
 
 //Functions
 
-//Closes modal
-function closeModal(modalWindow) {
-  modalWindow.classList.remove("popup_opened");
-};
-
-//closes modal on escape
-function escapeModal(modalWindow) {
-  document.addEventListener('keydown', function (evt) {
-    if (evt.key === "Escape") {
-      closeModal(modalWindow);
-      document.removeEventListener('keydown', closeModal)
-    }
-  })
-};
-//closes modal on overlay click
-function closeOverlay(modalWindow) {
-  document.addEventListener('click', function (evt) {
-    if (evt.target === modalWindow) {
-      closeModal(modalWindow)
-      document.removeEventListener('click', closeModal)
-    }
-  })
-};
-
 //Opens modal 
 function openModal(modalWindow) {
   modalWindow.classList.add("popup_opened");
-  escapeModal(modalWindow);
-  closeOverlay(modalWindow);
+  document.addEventListener('keydown', escapeModal);
+  document.addEventListener('click', closeOverlay);
+};
+
+//Closes modal
+function closeModal(modalWindow) {
+  modalWindow.classList.remove("popup_opened");
+  document.removeEventListener('keydown', escapeModal);
+  document.removeEventListener('click', closeOverlay);
+};
+
+//closes modal on escape
+function escapeModal(evt) {
+  let modalWindow = document.querySelector(".popup_opened")
+  if (evt.key === "Escape") {
+    closeModal(modalWindow)
+  }
+};
+
+//closes modal on overlay click
+function closeOverlay(evt) {
+  let modalWindow = document.querySelector(".popup_opened")
+  if (evt.target === modalWindow) {
+    closeModal(modalWindow)
+  }
 };
 
 //Edit Form Profile
