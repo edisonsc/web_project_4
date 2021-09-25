@@ -8,13 +8,13 @@ const checkInputValidity = (formElement, inputElement, settings) => {
     if (!isValid(inputElement)) {
         //show the error message and add the error class
         inputElement.classList.add(settings.inputErrorClass);
-        errorElement.innerText = inputElement.validationMessage;
+        errorElement.textContent = inputElement.validationMessage;
         errorElement.classList.add(settings.errorClass);
 
     } else {
         //hide the error
         inputElement.classList.remove(settings.inputErrorClass);
-        errorElement.innerText = "";
+        errorElement.textContent = "";
         errorElement.classList.remove(settings.errorClass);
     };
 }
