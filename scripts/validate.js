@@ -1,6 +1,4 @@
-const isValid = (inputElement) => {
-    return inputElement.validity.valid;
-}
+const isValid = (inputElement) => inputElement.validity.valid;
 
 const checkInputValidity = (formElement, inputElement, settings) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -20,14 +18,14 @@ const checkInputValidity = (formElement, inputElement, settings) => {
 }
 
 toggleButtonState = (inputList, button, settings) => {
-   const allValid = inputList.every(isValid);
-   if (allValid){
-       button.classList.remove(settings.inactiveButtonClass);
-       button.disabled = false;
-   } else {
-       button.classList.add(settings.inactiveButtonClass);
-       button.disabled = true;
-   }
+    const allValid = inputList.every(isValid);
+    if (allValid) {
+        button.classList.remove(settings.inactiveButtonClass);
+        button.disabled = false;
+    } else {
+        button.classList.add(settings.inactiveButtonClass);
+        button.disabled = true;
+    }
 }
 
 const setupEventListeners = (formElement, settings) => {
