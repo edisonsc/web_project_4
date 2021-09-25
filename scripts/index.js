@@ -175,7 +175,7 @@ function handlePlaceSubmit(evt) {
   };
   const cardElement = createNewCard(card);
   cardList.prepend(cardElement);
-  document.getElementById('editPlace').reset();
+  addForm.reset();
 }
 
 //Add form EventListener
