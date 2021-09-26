@@ -80,7 +80,7 @@ function closeModal(modalWindow) {
 
 //closes modal on escape
 function escapeModal(evt) {
-  let modalWindow = document.querySelector(".popup_opened")
+  const modalWindow = document.querySelector(".popup_opened")
   if (evt.key === "Escape") {
     closeModal(modalWindow)
   }
@@ -88,7 +88,7 @@ function escapeModal(evt) {
 
 //closes modal on overlay click
 function closeOverlay(evt) {
-  let modalWindow = document.querySelector(".popup_opened")
+  const modalWindow = document.querySelector(".popup_opened")
   if (evt.target === modalWindow) {
     closeModal(modalWindow)
   }
