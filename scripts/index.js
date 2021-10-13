@@ -1,3 +1,4 @@
+import FormValidator from "./FormValidator.js";
 
 //Initial card array
 const initialCards = [
@@ -194,4 +195,19 @@ initialCards.forEach((card) => {
   cardList.append(cardElement);
 });
 
+//Validation
 
+const formValidationSettings = {
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: "form__button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error_visible"
+}
+
+//create instance of form validator 
+
+const addFormValidator = new FormValidator(formValidationSettings, addForm);
+addFormValidator.enableValidation();
+const editFormValidator = new FormValidator(formValidationSettings, editForm);
+editFormValidator.enableValidation();
