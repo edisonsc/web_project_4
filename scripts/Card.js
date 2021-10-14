@@ -7,17 +7,26 @@ class Card {
     }
 
     _getTemplate() {
+        const cardElement = document
+        .querySelector(this._cardSelector)
+        .content.querySelector('.photo-grid-card')
+        .cloneNode(true);
 
+        return cardElement
     }
 
     _setEventListeners() {
-        //set ups events
-
+        //set up events
+        console.warn('setEvent Listeners is not complete')
     }
 
     generateCard() {
         this._card = this._getTemplate();
-        console.log(this._card)
+        this._setEventListeners();
+
+        const cardImage = this._card.querySelector('.photo-grid__image');
+        cardImage
+        this._card.querySelector('.photo-grid__title').textContent = this._name
     }
 }
 
