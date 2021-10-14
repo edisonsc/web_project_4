@@ -36,9 +36,8 @@ class FormValidator {
     }
 
     _toggleButtonState(inputList, btn) {
-    
-        if (inputList.every(this._isValid)) {
-            return inputList;
+        const allValid = inputList.every(this._isValid)
+        if (allValid) {
             btn.classList.remove(this._inactiveButtonClass);
             btn.disabled = false; 
         } else {
