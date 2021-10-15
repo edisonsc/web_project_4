@@ -142,41 +142,45 @@ function handleRemoveCard(evt) {
   item.remove();
   item = null;
 }
-
-//Create new card
-function createNewCard(card) {
-  const cardElement = cardTemplate
-    .querySelector(".photo-grid__card")
-    .cloneNode(true);
-  //set card image
-  const cardImage = cardElement.querySelector(".photo-grid__image");
-  cardImage.src = card.link;
-  //set card alt text
-  cardImage.alt = card.name;
-  //set card title
-  cardElement.querySelector(".photo-grid__title").textContent = card.name;
-  //set delete icon
-  const deleteButton = cardElement.querySelector(".photo-grid__delete-icon");
-  deleteButton.addEventListener("click", handleRemoveCard);
-  //set like button
-  const likeButton = cardElement.querySelector(".photo-grid__heart-icon");
-  likeButton.addEventListener("click", handleLikeCard);
-  //set image
-  cardImage.addEventListener("click", () => handleImagePreview(card));
-  //append to lists
-  return cardElement;
+//Create new card from class
+const createNewCard = (data, grid) => {
+  const card = new Card(data, '#cardTemplate').generateCard();
+  grid.prepend(card);
 }
+// //Create new card
+// function createNewCard(card) {
+//   const cardElement = cardTemplate
+//     .querySelector(".photo-grid__card")
+//     .cloneNode(true);
+//   //set card image
+//   const cardImage = cardElement.querySelector(".photo-grid__image");
+//   cardImage.src = card.link;
+//   //set card alt text
+//   cardImage.alt = card.name;
+//   //set card title
+//   cardElement.querySelector(".photo-grid__title").textContent = card.name;
+//   //set delete icon
+//   const deleteButton = cardElement.querySelector(".photo-grid__delete-icon");
+//   deleteButton.addEventListener("click", handleRemoveCard);
+//   //set like button
+//   const likeButton = cardElement.querySelector(".photo-grid__heart-icon");
+//   likeButton.addEventListener("click", handleLikeCard);
+//   //set image
+//   cardImage.addEventListener("click", () => handleImagePreview(card));
+//   //append to lists
+//   return cardElement;
+// }
 
 //Add a new place to cards
 //Place form submit function
 function handlePlaceSubmit(evt) {
   evt.preventDefault();
-  const card = {
+  createNewCard( {
     name: placeInput.value,
     link: linkInput.value,
-  };
-  const cardElement = createNewCard(card);
-  cardList.prepend(cardElement);
+  },
+  cardList
+  );
   addForm.reset();
 }
 
@@ -190,10 +194,8 @@ createButton.addEventListener("click", () => closeModal(addModal));
 
 //Actions
 //Populate page with cards from initialCards array
-initialCards.forEach((card) => {
-  const cardElement = createNewCard(card);
-  //append to list
-  cardList.append(cardElement);
+initialCards.forEach((data) => {
+  createNewCard(data, cardList);
 });
 
 //Validation
@@ -206,7 +208,7 @@ const formValidationSettings = {
   errorClass: "form__error_visible"
 }
 
-//create instance of form validator 
+//Create instance of FormValidator 
 
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 addFormValidator.enableValidation();
