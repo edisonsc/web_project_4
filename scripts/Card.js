@@ -40,6 +40,7 @@ class Card {
         this._link = data.link;
 
         this._cardSelector = cardSelector;
+    
     }
 
     _getTemplate() {
@@ -84,6 +85,8 @@ class Card {
         this._element.querySelector('.photo-grid__image').src = this._link;
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
+
+
 
         return this._element
     }
