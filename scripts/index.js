@@ -131,45 +131,11 @@ function handleImagePreview(card) {
 //preview modal event listeners
 previewModalClose.addEventListener("click", () => closeModal(previewModal));
 
-
-//Like a card
-function handleLikeCard(evt) {
-  evt.target.classList.toggle("photo-grid__heart-icon_active");
-}
-//Remove a card
-function handleRemoveCard(evt) {
-  let item = evt.target.closest(".photo-grid__card");
-  item.remove();
-  item = null;
-}
 //Create new card from class
 const createNewCard = (data, grid) => {
   const card = new Card(data, '#cardTemplate').generateCard();
   grid.prepend(card);
 }
-// //Create new card
-// function createNewCard(card) {
-//   const cardElement = cardTemplate
-//     .querySelector(".photo-grid__card")
-//     .cloneNode(true);
-//   //set card image
-//   const cardImage = cardElement.querySelector(".photo-grid__image");
-//   cardImage.src = card.link;
-//   //set card alt text
-//   cardImage.alt = card.name;
-//   //set card title
-//   cardElement.querySelector(".photo-grid__title").textContent = card.name;
-//   //set delete icon
-//   const deleteButton = cardElement.querySelector(".photo-grid__delete-icon");
-//   deleteButton.addEventListener("click", handleRemoveCard);
-//   //set like button
-//   const likeButton = cardElement.querySelector(".photo-grid__heart-icon");
-//   likeButton.addEventListener("click", handleLikeCard);
-//   //set image
-//   cardImage.addEventListener("click", () => handleImagePreview(card));
-//   //append to lists
-//   return cardElement;
-// }
 
 //Add a new place to cards
 //Place form submit function
@@ -209,8 +175,9 @@ const formValidationSettings = {
 }
 
 //Create instance of FormValidator 
-
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 addFormValidator.enableValidation();
+
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
+
