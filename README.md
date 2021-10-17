@@ -39,3 +39,6 @@ function handleFormSubmit(evt) {
 ```
 
 The handleFormSubmit function updates the profile name and title to the form input values. An event listener calls the function on submit. 
+
+**Refactoring**
+In this sprint I refactored the index.js file into Card.js and FormValidator.js. Card.js receives a template and generats a new card. FormValidator handles all form validation. 
