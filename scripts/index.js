@@ -1,6 +1,15 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-import {previewModal, previewImage, previewCaption, previewModalClose, openModal, closeModal, escapeModal, closeOverlay} from "./Utils.js"
+import {
+  previewModal,
+  previewImage,
+  previewCaption,
+  previewModalClose,
+  openModal,
+  closeModal,
+  escapeModal,
+  closeOverlay,
+} from "./Utils.js";
 
 //Initial card array
 const initialCards = [
@@ -97,20 +106,15 @@ previewModalClose.addEventListener("click", () => closeModal(previewModal));
 
 //Create new card from class
 const createNewCard = (data, grid) => {
-  const card = new Card(data, '#cardTemplate').generateCard();
+  const card = new Card(data, "#cardTemplate").generateCard();
   grid.prepend(card);
-}
+};
 
 //Add a new place to cards
 //Place form submit function
 function handlePlaceSubmit(evt) {
   evt.preventDefault();
-  createNewCard( {
-    name: placeInput.value,
-    link: linkInput.value,
-  },
-  cardList
-  );
+  createNewCard({ name: placeInput.value, link: linkInput.value }, cardList);
   addForm.reset();
 }
 
@@ -135,13 +139,12 @@ const formValidationSettings = {
   submitButtonSelector: ".form__button",
   inactiveButtonClass: "form__button_disabled",
   inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible"
-}
+  errorClass: "form__error_visible",
+};
 
-//Create instance of FormValidator 
+//Create instance of FormValidator
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 addFormValidator.enableValidation();
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
-
