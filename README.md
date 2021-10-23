@@ -1,4 +1,4 @@
-# Project 4: Around The U.S.
+# Around The U.S.
 
 ### Overview
 This project uses HTML, CSS, JavaScript and BEM. The site is built from a design file in Figma. 
