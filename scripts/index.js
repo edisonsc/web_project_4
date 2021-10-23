@@ -1,5 +1,6 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
+import {previewModal, previewImage, previewCaption, previewModalClose, openModal, closeModal, escapeModal, closeOverlay} from "./Utils.js"
 
 //Initial card array
 const initialCards = [
@@ -50,12 +51,6 @@ const addForm = addModal.querySelector(".form");
 const placeInput = document.querySelector(".form__input_type_place");
 const linkInput = document.querySelector(".form__input_type_link");
 
-//Preview query selectors
-const previewModal = document.querySelector(".popup_type_preview");
-const previewImage = document.querySelector(".popup__image");
-const previewCaption = document.querySelector(".popup__caption");
-const previewModalClose = previewModal.querySelector(".popup__close-button");
-
 //button selectors
 const editButton = document.querySelector(".profile__edit-button");
 const editModalClose = editModal.querySelector(".popup__close-button");
@@ -65,37 +60,6 @@ const addModalClose = addModal.querySelector(".popup__close-button");
 const createButton = document.querySelector("#create-button");
 
 //Functions
-
-//Opens modal 
-function openModal(modalWindow) {
-  modalWindow.classList.add("popup_opened");
-  document.addEventListener('keydown', escapeModal);
-  document.addEventListener('click', closeOverlay);
-};
-
-//Closes modal
-function closeModal(modalWindow) {
-  modalWindow.classList.remove("popup_opened");
-  document.removeEventListener('keydown', escapeModal);
-  document.removeEventListener('click', closeOverlay);
-};
-
-//closes modal on escape
-function escapeModal(evt) {
-  const modalWindow = document.querySelector(".popup_opened")
-  if (evt.key === "Escape") {
-    closeModal(modalWindow)
-  }
-};
-
-//closes modal on overlay click
-function closeOverlay(evt) {
-  const modalWindow = document.querySelector(".popup_opened")
-  if (evt.target === modalWindow) {
-    closeModal(modalWindow)
-  }
-};
-
 //Edit Form Profile
 //Adds initial values of name and job title to profile edit modal
 function prefillEditForm() {
