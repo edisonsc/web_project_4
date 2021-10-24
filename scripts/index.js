@@ -1,15 +1,9 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import {
-  previewModal,
-  previewImage,
-  previewCaption,
-  previewModalClose,
   openModal,
-  closeModal,
-  escapeModal,
-  closeOverlay,
-} from "./Utils.js";
+  closeModal
+} from "./utils.js";
 
 //Initial card array
 const initialCards = [
