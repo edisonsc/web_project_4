@@ -2,7 +2,9 @@ import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import {
   openModal,
-  closeModal
+  closeModal,
+  previewModalClose,
+  previewModal,
 } from "./utils.js";
 
 //Initial card array
