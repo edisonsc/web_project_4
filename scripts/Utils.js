@@ -34,4 +34,4 @@ const closeOverlay = (evt) => {
     }
 };
 
-export { previewModal, previewImage, previewCaption }
+export { previewModal, previewImage, previewCaption, openModal, closeModal }
