@@ -1,4 +1,4 @@
-import {previewModal, previewImage, previewCaption, previewModalClose, openModal, closeModal, escapeModal, closeOverlay} from "./Utils.js"
+import {previewModal, previewImage, previewCaption, openModal} from "./utils.js"
 
 class Card {
     constructor(data, cardSelector) {

@@ -1,15 +1,11 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import {
-  previewModal,
-  previewImage,
-  previewCaption,
-  previewModalClose,
   openModal,
   closeModal,
-  escapeModal,
-  closeOverlay,
-} from "./Utils.js";
+  previewModalClose,
+  previewModal,
+} from "./utils.js";
 
 //Initial card array
 const initialCards = [
@@ -92,14 +88,6 @@ editButton.addEventListener("click", () => openModal(editModal));
 editModalClose.addEventListener("click", () => closeModal(editModal));
 saveButton.addEventListener("click", () => closeModal(editModal));
 
-//Image preview
-function handleImagePreview(card) {
-  previewImage.src = card.link;
-  previewImage.alt = card.name;
-  previewCaption.textContent = card.name;
-
-  openModal(previewModal);
-}
 
 //preview modal event listeners
 previewModalClose.addEventListener("click", () => closeModal(previewModal));
