@@ -137,3 +137,10 @@ addFormValidator.enableValidation();
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
+
+
+const cardArray = new Section ({
+  items: initialCards
+}, cardList )
+
+cardArray.renderer();
