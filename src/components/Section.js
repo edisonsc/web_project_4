@@ -1,12 +1,24 @@
-// Look at Lesson 5 Relationships between classes
+import Card from "./Card.js";
+
 class Section {
     constructor({items, renderer}, cardSelector){
        this._items = items,
-       this._container = document.querySelector(cardSelector);
+       this._grid = document.querySelector(cardSelector);
+       this.renderer = renderer;
     }
 
-    renderer(){}
-    addItem(){
-        this._container.append(cardElement)
+    renderer(){
+        this._items.forEach((item => {
+            const card = new Card(item, "#cardTemplate");
+
+            const cardElement = card.prepend(card)
+        }));
+
+
+    addItem(element){
+        this._grid.append(element)
     }
 }
+}
+
+export default Section
