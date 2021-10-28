@@ -1,4 +1,5 @@
 import {previewModal, previewImage, previewCaption, openModal} from "./utils.js"
+import PopupWithImage from './PopupWithImage.js'
 
 class Card {
     constructor(data, cardSelector) {
