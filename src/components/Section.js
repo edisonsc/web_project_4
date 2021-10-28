@@ -1,9 +1,9 @@
 import Card from "./Card.js";
 
 class Section {
-    constructor({items, renderer}, cardSelector){
+    constructor({items, renderer}, cardClassSelector){
        this._items = items,
-       this._grid = document.querySelector(cardSelector);
+       this._grid = document.querySelector(cardClassSelector);
        this.renderer = renderer;
     }
 
