@@ -1,10 +1,13 @@
 import Popup from './Popup';
 
 class PopupWithForm extends Popup {
-    constructor(){
-
+    constructor(popupSelector, formSubmit){
+        super(popupSelector);
+        this.formSubmit = formSubmit;
+        this.popupForm = this.querySelector(".form")
     }
   _getInputValues(){
+      
 
   }
 
