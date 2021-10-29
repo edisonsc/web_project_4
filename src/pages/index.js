@@ -38,7 +38,8 @@ const initialCards = [
 
 //Select card template and content
 const cardTemplate = document.querySelector("#cardTemplate").content;
-const cardList = document.querySelector(".photo-grid");
+// const cardList = document.querySelector(".photo-grid");
+const cardListSection = document.querySelector(".images");
 const cardTitle = document.querySelector(".photo-grid__title");
 
 //Edit form query selectors
@@ -92,12 +93,20 @@ saveButton.addEventListener("click", () => closeModal(editModal));
 
 //preview modal event listeners
 previewModalClose.addEventListener("click", () => closeModal(previewModal));
+//Actions
+
 
 //Create new card from class
-const createNewCard = (data, grid) => {
-  const card = new Card(data, "#cardTemplate").generateCard();
-  grid.prepend(card);
-};
+// const createNewCard = (data, grid) => {
+//   const card = new Card(data, "#cardTemplate").generateCard();
+//   grid.prepend(card);
+// };
+
+//Populate page with cards from initialCards array
+// initialCards.forEach((data) => {
+//   createNewCard(data, cardList);
+// });
+
 
 //Add a new place to cards
 //Place form submit function
@@ -115,11 +124,7 @@ addButton.addEventListener("click", () => {
 addModalClose.addEventListener("click", () => closeModal(addModal));
 createButton.addEventListener("click", () => closeModal(addModal));
 
-//Actions
-//Populate page with cards from initialCards array
-initialCards.forEach((data) => {
-  createNewCard(data, cardList);
-});
+
 
 //Validation
 
@@ -138,9 +143,29 @@ addFormValidator.enableValidation();
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
 
+// const cardArray = new Section({
+//   items: initialCards,
+//   renderer: (item) => {
+//    const card = new Card (item, ".card-template");
 
-const cardArray = new Section ({
-  items: initialCards
-}, cardList )
+//    const cardElement = card.generateCard();
 
-cardArray.renderer();
+//    cardArray.addItem(cardElement);
+//   },
+// },
+//   cardListSection
+// );
+
+// cardArray.renderItems();
+
+
+const cardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card =  new Card(item, ".card-template").generateCard();
+
+    cardList.addItem(card);
+    },
+  },
+  cardListSection
+);
