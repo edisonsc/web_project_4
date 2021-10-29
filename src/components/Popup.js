@@ -37,10 +37,3 @@ class Popup {
 }
 
 export default Popup
-
-// handleEscapeUp(evt){
-//     evt.preventDefault();
-//     if(evt.which === ESC_KEYCODE) {
-//         this.close();
-//     }
-// }
