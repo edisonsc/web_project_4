@@ -1,5 +1,4 @@
 import {previewModal, previewImage, previewCaption, openModal} from "./utils.js"
-import PopupWithImage from './PopupWithImage.js'
 
 class Card {
     constructor(data, cardSelector) {
@@ -54,8 +53,6 @@ class Card {
         this._element.querySelector('.photo-grid__image').alt = this._name;
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
-
-
 
         return this._element
     }
