@@ -26,11 +26,3 @@ class PopupWithForm extends Popup {
 
 }
 export default PopupWithForm
-
-//Add a new place to cards
-//Place form submit function
-// function handlePlaceSubmit(evt) {
-//   evt.preventDefault();
-//   createNewCard({ name: placeInput.value, link: linkInput.value }, cardList);
-//   addForm.reset();
-// }
