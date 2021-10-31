@@ -1,4 +1,4 @@
-import Popup from './Popup';
+import Popup from './Popup.js';
 
 class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
@@ -6,19 +6,11 @@ class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
-  _getTemplate() {
-    const formElement = document
-      .querySelector(this._popupElement)
-      .content.querySelector(".form")
-      .cloneNode(true);
-
-    return formElement;
-  }
-
   _setEventListeners() {
     this._popupElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
+      this._popupElement.close();
       this._popupElement.reset();
     })
   }
@@ -27,17 +19,18 @@ class PopupWithForm extends Popup {
     this._formValues = {};
     this._inputList.forEach((input) => {
       this._formValues[input.name] = input.value;
-
+      this._formValues[input.link] = input.value;
     })
     return this._formValues
   }
-  generateForm() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-
-    return this._element;
-  }
 
 }
-
 export default PopupWithForm
+
+//Add a new place to cards
+//Place form submit function
+// function handlePlaceSubmit(evt) {
+//   evt.preventDefault();
+//   createNewCard({ name: placeInput.value, link: linkInput.value }, cardList);
+//   addForm.reset();
+// }
