@@ -26,7 +26,7 @@ const initialCards = [
     },
   ];
 
-const cardListSection = ".images";
+const cardListSection = ".photo-grid";
 
 //Preview query selectors
 const previewModal = document.querySelector(".popup_type_preview");
