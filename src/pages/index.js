@@ -13,7 +13,7 @@ import {
 
 //Select card template and content
 const cardTemplate = document.querySelector("#cardTemplate").content;
-// const cardList = document.querySelector(".photo-grid");
+const cardList = document.querySelector(".photo-grid");
 const cardTitle = document.querySelector(".photo-grid__title");
 
 //Edit form query selectors
@@ -104,15 +104,27 @@ const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
 
 //Create instance of Section
-const cardList = new Section({
-  data: initialCards,
+const cardsList = new Section({
+  items: initialCards,
   renderer: (item) => {
     const card =  new Card(item, ".card-template");
     const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
+    cardsList.addItem(cardElement);
     },
   },
   cardListSection
 );
 
-cardList.renderItems();
+//Create instance of Form
+// const form = new PopupWithForm({
+//   formSelector: ".form-template",
+//   handleFormSubmit: (item) => {
+//   //   const card = new UserInfo(item, ".card-template_type_user");
+
+//   //   const cardElement = card.generateCard();
+
+//   //   cardsList.asItem(cardElement);
+//   // }
+// });
+
+cardsList.renderItems();
