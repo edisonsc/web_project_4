@@ -1,6 +1,9 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 import {
   openModal,
   closeModal,
@@ -71,14 +74,14 @@ previewModalClose.addEventListener("click", () => closeModal(previewModal));
 
 //Add a new place to cards
 //Place form submit function
-function handlePlaceSubmit(evt) {
-  evt.preventDefault();
-  createNewCard({ name: placeInput.value, link: linkInput.value }, cardList);
-  addForm.reset();
-}
+// function handlePlaceSubmit(evt) {
+//   evt.preventDefault();
+//   createNewCard({ name: placeInput.value, link: linkInput.value }, cardList);
+//   addForm.reset();
+// }
 
 //Add form EventListener
-addForm.addEventListener("submit", handlePlaceSubmit);
+// addForm.addEventListener("submit", handlePlaceSubmit);
 addButton.addEventListener("click", () => {
   openModal(addModal);
 });
@@ -107,24 +110,25 @@ editFormValidator.enableValidation();
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card =  new Card(item, ".card-template");
+    const card = new Card(item, ".card-template");
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
-    },
   },
+},
   cardListSection
 );
 
 //Create instance of Form
-// const form = new PopupWithForm({
-//   formSelector: ".form-template",
-//   handleFormSubmit: (item) => {
-//   //   const card = new UserInfo(item, ".card-template_type_user");
-
-//   //   const cardElement = card.generateCard();
-
-//   //   cardsList.asItem(cardElement);
-//   // }
-// });
+const form = new PopupWithForm({
+  popupSelector: ".form",
+  handleFormSubmit: (item) => {
+    const card = new Card(item, ".card-template");
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement);
+  },
+}
+);
 
 cardsList.renderItems();
+
+const imagePopup = new PopupWithImage();
