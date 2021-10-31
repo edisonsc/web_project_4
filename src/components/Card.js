@@ -1,10 +1,10 @@
-import {previewModal, previewImage, previewCaption, openModal} from "./utils.js"
+import {previewModal,  openModal} from "./utils.js"
 
 class Card {
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
-
+        this._handleCardClick = handleCardClick
         this._cardSelector = cardSelector;
     
     }
@@ -27,14 +27,10 @@ class Card {
         this._element = null;
     }
 
-    _handlePreviewImage() {
-        previewImage.src = this._link;
-        previewImage.alt = this._name;
-        previewCaption.textContent = this._name;
-
-        openModal(previewModal)
+    _handleCardClick(){
+        
     }
-
+    
     _setEventListeners() {
         //set up events
         this._element.querySelector('.photo-grid__heart-icon').addEventListener("click", () => { this._handleLikeCard() });
