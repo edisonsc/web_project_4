@@ -6,40 +6,14 @@ import {
   closeModal,
   previewModalClose,
   previewModal,
+  cardListSection,
+  initialCards
 } from "../components/utils.js";
 
-//Initial card array
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
 
 //Select card template and content
 const cardTemplate = document.querySelector("#cardTemplate").content;
 // const cardList = document.querySelector(".photo-grid");
-const cardListSection = document.querySelector(".images");
 const cardTitle = document.querySelector(".photo-grid__title");
 
 //Edit form query selectors
@@ -95,19 +69,6 @@ saveButton.addEventListener("click", () => closeModal(editModal));
 previewModalClose.addEventListener("click", () => closeModal(previewModal));
 //Actions
 
-
-//Create new card from class
-// const createNewCard = (data, grid) => {
-//   const card = new Card(data, "#cardTemplate").generateCard();
-//   grid.prepend(card);
-// };
-
-//Populate page with cards from initialCards array
-// initialCards.forEach((data) => {
-//   createNewCard(data, cardList);
-// });
-
-
 //Add a new place to cards
 //Place form submit function
 function handlePlaceSubmit(evt) {
@@ -123,7 +84,6 @@ addButton.addEventListener("click", () => {
 });
 addModalClose.addEventListener("click", () => closeModal(addModal));
 createButton.addEventListener("click", () => closeModal(addModal));
-
 
 
 //Validation
@@ -143,29 +103,16 @@ addFormValidator.enableValidation();
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
 
-// const cardArray = new Section({
-//   items: initialCards,
-//   renderer: (item) => {
-//    const card = new Card (item, ".card-template");
-
-//    const cardElement = card.generateCard();
-
-//    cardArray.addItem(cardElement);
-//   },
-// },
-//   cardListSection
-// );
-
-// cardArray.renderItems();
-
-
+//Create instance of Section
 const cardList = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card =  new Card(item, ".card-template").generateCard();
-
-    cardList.addItem(card);
+    const card =  new Card(item, ".card-template");
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
     },
   },
   cardListSection
 );
+
+cardList.renderItems();
