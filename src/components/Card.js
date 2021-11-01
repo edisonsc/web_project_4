@@ -4,8 +4,9 @@ class Card {
     constructor(data, cardSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
-        this._handleCardClick = handleCardClick
+      
         this._cardSelector = cardSelector;
+        this._handleCardClick = this._handleCardClick.bind(this);
     
     }
 
