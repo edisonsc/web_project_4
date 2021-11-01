@@ -28,14 +28,14 @@ class Card {
     }
 
     _handleCardClick(){
-        
+       console.log("card is clicked")
     }
     
     _setEventListeners() {
         //set up events
         this._element.querySelector('.photo-grid__heart-icon').addEventListener("click", () => { this._handleLikeCard() });
         this._element.querySelector('.photo-grid__delete-icon').addEventListener("click", () => { this._handleRemoveCard() });
-        this._element.querySelector('.photo-grid__image').addEventListener("click", () => {this._handlePreviewImage() });
+        this._element.querySelector('.photo-grid__image').addEventListener("click", () => {this._handleCardClick() });
 
     }
 
