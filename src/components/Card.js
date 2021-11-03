@@ -3,7 +3,7 @@ import Popup from './Popup.js'
 import PopupWithImage from "./PopupWithImage.js"
 
 class Card {
-    constructor({data, handleCardClick}, cardSelector) {
+    constructor({data, handleCardClick, cardSelector}) {
         this._name = data.name;
         this._link = data.link;
         this._cardSelector = cardSelector;
