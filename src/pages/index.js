@@ -7,8 +7,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import {
   openModal,
   closeModal,
-  previewModalClose,
-  previewModal,
   cardListSection,
   initialCards
 } from "../components/utils.js";
@@ -69,7 +67,7 @@ saveButton.addEventListener("click", () => closeModal(editModal));
 
 
 //preview modal event listeners
-previewModalClose.addEventListener("click", () => closeModal(previewModal));
+
 //Actions
 
 //Add a new place to cards
@@ -107,6 +105,7 @@ const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
 
 const popupImage = new PopupWithImage('.popup_type_preview');
+popupImage.setEventListeners();
 
 
 //Create instance of Section
@@ -115,9 +114,10 @@ const cardsList = new Section({
   renderer: (item) => {
     const card = new Card({
       data: item,
-      handleCardClick: (item) => { popupImage.open(item) }
+      handleCardClick: (item) => { popupImage.open(item) },
+      cardSelector: ".card-template"
     },
-      ".card-template");
+     );
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
   },
