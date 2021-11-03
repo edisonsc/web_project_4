@@ -106,11 +106,18 @@ addFormValidator.enableValidation();
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
 
+const popupImage = new PopupWithImage('.popup_type_preview');
+
+
 //Create instance of Section
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, ".card-template");
+    const card = new Card({
+      data: item,
+      handleCardClick: (item) => { popupImage.open(item) }
+    },
+      ".card-template");
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
   },
@@ -118,17 +125,32 @@ const cardsList = new Section({
   cardListSection
 );
 
+// const newPlace = new PopupWithForm({
+//   handleFormSubmit: (item) => {
+//     const newCard = new Card({
+//       data: { name: item.title, link: item.src },
+//       handleCardClick: () => {
+//         popupImage.open(item);
+//       }
+//     }, cardSelector)
+//     const cardElement = newCard.generateCard();
+//     cardsList.addItem(cardElement)
+//   }
+// }, "popup_type_add")
+// newPlace.setEventListeners()
+// newPlace.open();
+
+
 //Create instance of Form
-const form = new PopupWithForm({
-  popupSelector: ".form",
-  handleFormSubmit: (item) => {
-    const card = new Card(item, ".card-template");
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
-  },
-}
-);
+// const form = new PopupWithForm({
+//    popupSelector: "form",
+// handleFormSubmit: (item) => {
+// const card = new Card(item, ".card-template");
+// const cardElement = card.generateCard();
+// cardsList.addItem(cardElement);
+//   },
+//  }
+// );
 
 cardsList.renderItems();
 
-const imagePopup = new PopupWithImage();
