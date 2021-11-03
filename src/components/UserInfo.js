@@ -11,10 +11,8 @@ class UserInfo {
     setUserInfo(name, title){
         //takes a name and title
         this._nameElement.textContent = name
+        this._titleElement.textContent = title
     }
 }
 
 export default UserInfo
-
-//constructor(popupSelector) {
-    this._popupElement = document.querySelector(popupSelector);
