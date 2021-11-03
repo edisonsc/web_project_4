@@ -3,6 +3,7 @@ class Popup {
         this._popupElement = document.querySelector(popupSelector);
         this._handleEscClose = this._handleEscClose.bind(this);
         this._handleCloseOverlay = this._handleCloseOverlay.bind(this);
+        this.close = this.close.bind(this)
     }
 
     open(){
@@ -18,21 +19,20 @@ class Popup {
     }
 
     _handleEscClose(evt){  
-            this._popupElement = document.querySelector(".popup_opened")
+           
             if (evt.key === "Escape") {
-                this.close(this._popupSelector)
+                this.close()
             }
         };
     
     _handleCloseOverlay(evt){
-            this._popupElement = document.querySelector(".popup_opened")
-            if (evt.target === this._popupSelector) {
-                this.close(this._popupSelector)
+            if (evt.target === this._popupElement) {
+                this.close()
             }
         };
 
     setEventListeners(){
-        this._popupElement.querySelector(".popup__close-button").addEventListener("click", () => {this.close()})
+        this._popupElement.querySelector(".popup__close-button").addEventListener("click", this.close)
     }
 }
 
