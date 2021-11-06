@@ -50,8 +50,8 @@ class FormValidator {
                 //check if input is valid
                 this._checkInputValidity(inputElement);
                 this._toggleButtonState();
+                
             });
-            
         })
     }
     
