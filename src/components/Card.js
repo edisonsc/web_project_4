@@ -1,7 +1,3 @@
-import { previewModal, previewImage, previewCaption, openModal } from "./utils.js"
-import Popup from './Popup.js'
-import PopupWithImage from "./PopupWithImage.js"
-
 class Card {
     constructor({data, handleCardClick, cardSelector}) {
         this._name = data.name;
