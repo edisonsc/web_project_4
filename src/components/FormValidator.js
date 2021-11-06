@@ -32,13 +32,19 @@ class FormValidator {
     }
 
     _toggleButtonState() {
-        if (this._inputList.every((input) => input.validity.valid)) {
-            this._button.classList.remove(this._inactiveButtonClass);
-            this._button.disabled = false;
-        } else {
+        if (this._getInvalidInput()) {
             this._button.classList.add(this._inactiveButtonClass);
             this._button.disabled = true;
+        } else {
+            this._button.classList.remove(this._inactiveButtonClass);
+            this._button.disabled = false;
         }
+    }
+
+    _getInvalidInput(){
+        return this._inputList.some((inputElement) => {
+            return !inputElement.validity.valid;
+        })
     }
 
     _setEventListeners() {
@@ -50,7 +56,6 @@ class FormValidator {
                 //check if input is valid
                 this._checkInputValidity(inputElement);
                 this._toggleButtonState();
-
             });
         })
     }
