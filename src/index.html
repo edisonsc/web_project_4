@@ -11,7 +11,6 @@
     <title>Around the U.S.</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="root">
@@ -19,12 +18,12 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <header class="header">
-        <img src="./images/vector-logo.svg" alt="logo" class="logo">
+        <img src="<%=require('./images/vector-logo.svg')%>" alt="logo" class="logo">
     </header>
     <main>
         <section class="profile">
             <div class="profile__area">
-                <img src="./images/profile-image-jacques.jpg" alt="Jacques Cousteau" class="profile__image">
+                <img src="<%=require('./images/profile-image-jacques.jpg')%>" alt="Jacques Cousteau" class="profile__image">
                 <div class="profile__name-area">
                     <h1 class="profile__name">Jacques Cousteau</h1>
                     <button aria-label="edit" type="button" class="button profile__edit-button opacity"></button>
@@ -99,8 +98,6 @@
             </div>
         </li>
     </template>
-    <!-- <script src="./scripts/validate.js"></script> -->
-    <script type= "module" src="./pages/index.js"></script>
 </body>
 
 </html>
