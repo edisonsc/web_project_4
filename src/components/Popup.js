@@ -18,8 +18,7 @@ class Popup {
         document.removeEventListener('click', this._handleCloseOverlay);
     }
 
-    _handleEscClose(evt){  
-           
+    _handleEscClose(evt){      
             if (evt.key === "Escape") {
                 this.close()
             }
