@@ -1,5 +1,5 @@
 class Card {
-    constructor({data, handleCardClick, cardSelector}) {
+    constructor({ data, handleCardClick, cardSelector }) {
         this._name = data.name;
         this._link = data.link;
         this._cardSelector = cardSelector;
@@ -28,7 +28,7 @@ class Card {
         //set up events
         this._element.querySelector('.photo-grid__heart-icon').addEventListener("click", () => { this._handleLikeCard() });
         this._element.querySelector('.photo-grid__delete-icon').addEventListener("click", () => { this._handleRemoveCard() });
-        this._element.querySelector('.photo-grid__image').addEventListener("click", () => { this._handleCardClick({link: this._link, name:this._name}) });
+        this._element.querySelector('.photo-grid__image').addEventListener("click", () => { this._handleCardClick({ link: this._link, name: this._name }) });
 
     }
 

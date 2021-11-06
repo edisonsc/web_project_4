@@ -31,10 +31,10 @@ class FormValidator {
         };
     }
 
-    _toggleButtonState() {   
+    _toggleButtonState() {
         if (this._inputList.every((input) => input.validity.valid)) {
             this._button.classList.remove(this._inactiveButtonClass);
-            this._button.disabled = false; 
+            this._button.disabled = false;
         } else {
             this._button.classList.add(this._inactiveButtonClass);
             this._button.disabled = true;
@@ -42,19 +42,19 @@ class FormValidator {
     }
 
     _setEventListeners() {
-       this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-       this._button = this._formElement.querySelector(this._submitButtonSelector);
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        this._button = this._formElement.querySelector(this._submitButtonSelector);
 
         this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
                 //check if input is valid
                 this._checkInputValidity(inputElement);
                 this._toggleButtonState();
-                
+
             });
         })
     }
-    
+
 
     //public method to enable form validation
     enableValidation() {
