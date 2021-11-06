@@ -1,3 +1,5 @@
+import './index.css';
+
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
@@ -9,7 +11,7 @@ import {
   initialCards
 } from "../components/utils.js";
 
-
+console.log("hello, world")
 //Modal Selectors
 const editModal = document.querySelector(".popup_type_edit");
 const addModal = document.querySelector(".popup_type_add");
