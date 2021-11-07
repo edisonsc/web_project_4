@@ -40,7 +40,7 @@ const editProfilePopup = new PopupWithForm(
     }
   })
 
-editPopup.setEventListeners();
+editProfilePopup.setEventListeners();
 editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profile.getUserInfo()); editPopup.open() })
 
 //Create add new place popup
@@ -59,7 +59,7 @@ const addPlacePopup = new PopupWithForm({
   }
 })
 
-addPopup.setEventListeners();
+addPlacePopup.setEventListeners();
 addButton.addEventListener("click", () => { addPlacePopup.open() })
 
 
