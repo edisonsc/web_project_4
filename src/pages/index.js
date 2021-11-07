@@ -9,11 +9,20 @@ import UserInfo from "../components/UserInfo.js";
 import {
   cardListSection,
   initialCards,
-  addForm,
-  addButton,
-  editForm,
-  editButton
 } from "../components/utils.js";
+
+//Modal Selectors
+const editModal = document.querySelector(".popup_type_edit");
+const addModal = document.querySelector(".popup_type_add");
+const previewModal = document.querySelector(".popup_type_preview");
+
+//Form Selectors
+const editForm = editModal.querySelector(".form");
+const addForm = addModal.querySelector(".form");
+
+//Button selectors
+const editButton = document.querySelector(".profile__edit-button");
+const addButton = document.querySelector(".profile__add-button");
 
 
 //Create popupImage
