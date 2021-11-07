@@ -12,7 +12,6 @@ class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues());
       this.close()
     })
-    this._popupElement.querySelector(".popup__close-button").addEventListener("click", this.close);
     super.setEventListeners();
   }
 
