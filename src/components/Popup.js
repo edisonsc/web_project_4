@@ -25,9 +25,11 @@ class Popup {
     };
 
     _handleCloseOverlay(evt) {
-        if (evt.target === this._popupElement) {
-            this.close()
-        }
+        this._popupElement.addEventListener('click', (evt) => {
+            if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+                this.close();
+            }
+        });
     };
 
     setEventListeners() {
