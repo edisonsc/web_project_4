@@ -32,7 +32,7 @@ popupImage.setEventListeners();
 //Create edit profile popup
 const profile = new UserInfo(".profile__name", ".profile__title");
 
-const editPopup = new PopupWithForm(
+const editProfilePopup = new PopupWithForm(
   {
     popupSelector: ".popup_type_edit",
     handleFormSubmit: (data) => {
@@ -41,10 +41,10 @@ const editPopup = new PopupWithForm(
   })
 
 editPopup.setEventListeners();
-editButton.addEventListener("click", () => { editPopup.setDefaultValues(profile.getUserInfo()); editPopup.open() })
+editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profile.getUserInfo()); editPopup.open() })
 
 //Create add new place popup
-const addPopup = new PopupWithForm({
+const addPlacePopup = new PopupWithForm({
   popupSelector: ".popup_type_add",
   handleFormSubmit: (item) => {
     const newPlace = { name: item['place-name'], link: item['place-link'] }
@@ -60,7 +60,7 @@ const addPopup = new PopupWithForm({
 })
 
 addPopup.setEventListeners();
-addButton.addEventListener("click", () => { addPopup.open() })
+addButton.addEventListener("click", () => { addPlacePopup.open() })
 
 
 //Validation
