@@ -41,7 +41,7 @@ const editProfilePopup = new PopupWithForm(
   })
 
 editProfilePopup.setEventListeners();
-editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profile.getUserInfo()); editPopup.open() })
+editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profile.getUserInfo()); editProfilePopup.open() })
 
 //Create add new place popup
 const addPlacePopup = new PopupWithForm({
