@@ -1,14 +1,12 @@
 class Api {
-    constructor(options){
+    constructor({baseUrl, headers}){
         this._baseUrl = baseUrl,
-        this._headers = headers
+        this._headers = headers  
     }
 
     getInitialCards() {
-        return fetch("https://around.nomoreparties.co/v1/group-42/cards", {
-          headers: {
-            authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6"
-          }
+       return fetch(this._baseUrl, {
+          headers: this._headers,
         })
           .then(res => {
             if (res.ok) {
@@ -16,8 +14,7 @@ class Api {
             }
             // if the server returns an error, reject the promise
             return Promise.reject(`Error: ${res.status}`);
-          });
-      } 
+          })  
 }
-
-
+}
+export default Api
