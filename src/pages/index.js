@@ -23,12 +23,13 @@ const addForm = addModal.querySelector(".form");
 //Button selectors
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
-const editAvatarButton = document.querySelector(".profile__avatar-button")
+const editAvatarButton = document.querySelector(".profile__avatar-button");
+const deleteButton = document.querySelector(".photo-grid__delete-icon")
 
 
 //Api
 const config = {
-  baseUrl: "https://around.nomoreparties.co/v1/group-11/cards",
+  baseUrl: "https://around.nomoreparties.co/v1/group-11/",
   headers: {
       authorization: "ce0cfad9-c022-44c4-8673-897f4eaf9eed",
       "Content-Type": "application/json"
@@ -56,27 +57,55 @@ api.getInitialCards().then((res) => {
   );
   
   cardsList.renderItems();
-
 }
 )
+
+//set user information
+
+
+api.getUserInfo().then((res) => {
+  const profile = new UserInfo(res)
+})
+
+const editProfilePopup = new PopupWithForm(
+  {
+    popupSelector: ".popup_type_edit",
+    handleFormSubmit: (data) => {
+      profile.getUserInfo(data['input-name'], data['input-title'])
+    }
+  })
+
+editProfilePopup.setEventListeners();
+editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(api.editUserInfo()); editProfilePopup.open() })
+
+
 
 //Create popupImage
 const popupImage = new PopupWithImage('.popup_type_preview');
 popupImage.setEventListeners();
 
 //Create edit profile popup
-const profile = new UserInfo(".profile__name", ".profile__title");
+// const profile = new UserInfo(".profile__name", ".profile__title");
 
-const editProfilePopup = new PopupWithForm(
-  {
-    popupSelector: ".popup_type_edit",
-    handleFormSubmit: (data) => {
-      profile.setUserInfo(data['input-name'], data['input-title'])
-    }
-  })
+// const editProfilePopup = new PopupWithForm(
+//   {
+//     popupSelector: ".popup_type_edit",
+//     handleFormSubmit: (data) => {
+//       profile.setUserInfo(data['input-name'], data['input-title'])
+//     }
+//   })
 
-editProfilePopup.setEventListeners();
-editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profile.getUserInfo()); editProfilePopup.open() })
+// editProfilePopup.setEventListeners();
+// editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profile.getUserInfo()); editProfilePopup.open() })
+
+//Create confirm delete popup
+const confirmDeletePopup = new PopupWithForm(
+  {popupSelector: ".popup_type_delete", 
+handleFormSubmit: console.log("clicked") }
+)
+
+// confirmDeletePopup.setEventListeners();
+// deleteButton.addEventListener("click", () => {confirmDeletePopup.open()})
 
 //Create add new place popup
 const addPlacePopup = new PopupWithForm({
