@@ -9,7 +9,6 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js"
 import {
   cardListSection,
-  initialCards,
 } from "../components/utils.js";
 
 //Modal Selectors
