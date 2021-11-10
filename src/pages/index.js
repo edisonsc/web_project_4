@@ -23,6 +23,7 @@ const addForm = addModal.querySelector(".form");
 //Button selectors
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
+const editAvatarButton = document.querySelector(".profile__avatar-button")
 
 const baseUrl = "https://around.nomoreparties.co/v1/group-11/cards"
 fetch(baseUrl, {
@@ -75,7 +76,7 @@ addButton.addEventListener("click", () => { addPlacePopup.open() })
 
 //Create edit profile avatar popup
 const editAvatar = new PopupWithForm({
-  popupSelector: ".popup_type_add",
+  popupSelector: ".popup_type_avatar",
   handleFormSubmit: console.log("clicked")
 })
 
