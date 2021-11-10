@@ -25,17 +25,16 @@ const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const editAvatarButton = document.querySelector(".profile__avatar-button")
 
-const baseUrl = "https://around.nomoreparties.co/v1/group-11/cards"
-fetch(baseUrl, {
-  headers: {
-    authorization: "ce0cfad9-c022-44c4-8673-897f4eaf9eed"
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
 
+//  api
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-11/cards",
+  headers: {
+      authorization: "ce0cfad9-c022-44c4-8673-897f4eaf9eed",
+      "Content-Type": "application/json"
+  }
+});
 
 //Create popupImage
 const popupImage = new PopupWithImage('.popup_type_preview');
