@@ -24,6 +24,17 @@ const addForm = addModal.querySelector(".form");
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 
+const baseUrl = "https://around.nomoreparties.co/v1/group-11/cards"
+fetch(baseUrl, {
+  headers: {
+    authorization: "ce0cfad9-c022-44c4-8673-897f4eaf9eed"
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); 
+
 
 //Create popupImage
 const popupImage = new PopupWithImage('.popup_type_preview');
@@ -62,6 +73,14 @@ const addPlacePopup = new PopupWithForm({
 addPlacePopup.setEventListeners();
 addButton.addEventListener("click", () => { addPlacePopup.open() })
 
+//Create edit profile avatar popup
+const editAvatar = new PopupWithForm({
+  popupSelector: ".popup_type_add",
+  handleFormSubmit: console.log("clicked")
+})
+
+editAvatar.setEventListeners();
+editAvatarButton.addEventListener("click", () => { editAvatar.open()})
 
 //Validation
 const formValidationSettings = {
