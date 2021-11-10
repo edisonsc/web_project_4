@@ -40,6 +40,7 @@ const addForm = addModal.querySelector(".form");
 //Button selectors
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
+const editAvatarButton = document.querySelector(".profile-image")
 
 
-export { initialCards, cardListSection, editButton, addButton, editForm, addForm }
+export { initialCards, cardListSection, editButton, addButton, editForm, addForm , editAvatarButton}

@@ -12,7 +12,8 @@ import {
   addForm,
   addButton,
   editForm,
-  editButton
+  editButton, 
+  editAvatarButton
 } from "../components/utils.js";
 
 const baseUrl = "https://around.nomoreparties.co/v1/group-11/cards"
@@ -64,6 +65,14 @@ const addPopup = new PopupWithForm({
 addPopup.setEventListeners();
 addButton.addEventListener("click", () => { addPopup.open() })
 
+//Create edit profile avatar popup
+const editAvatar = new PopupWithForm({
+  popupSelector: ".popup_type_add",
+  handleFormSubmit: console.log("clicked")
+})
+
+editAvatar.setEventListeners();
+editAvatarButton.addEventListener("click", () => { editAvatar.open()})
 
 //Validation
 const formValidationSettings = {
