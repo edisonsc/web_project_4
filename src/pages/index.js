@@ -15,6 +15,17 @@ import {
   editButton
 } from "../components/utils.js";
 
+const baseUrl = "https://around.nomoreparties.co/v1/group-11/cards"
+fetch(baseUrl, {
+  headers: {
+    authorization: "ce0cfad9-c022-44c4-8673-897f4eaf9eed"
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); 
+
 
 //Create popupImage
 const popupImage = new PopupWithImage('.popup_type_preview');
