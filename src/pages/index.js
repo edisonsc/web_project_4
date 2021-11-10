@@ -6,6 +6,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js"
 import {
   cardListSection,
   initialCards,
@@ -26,15 +27,39 @@ const addButton = document.querySelector(".profile__add-button");
 const editAvatarButton = document.querySelector(".profile__avatar-button")
 
 
-//  api
-
-const api = new Api({
+//Api
+const config = {
   baseUrl: "https://around.nomoreparties.co/v1/group-11/cards",
   headers: {
       authorization: "ce0cfad9-c022-44c4-8673-897f4eaf9eed",
       "Content-Type": "application/json"
   }
-});
+}
+
+const api = new Api(config);
+
+//Load initial cards from Api
+api.getInitialCards().then((res) => {
+  const cardsList = new Section({
+    items: res,
+    renderer: (item) => {
+      const card = new Card({
+        data: item,
+        handleCardClick: (item) => { popupImage.open(item) },
+        cardSelector: ".card-template"
+      },
+      );
+      const cardElement = card.generateCard();
+      cardsList.addItem(cardElement);
+    },
+  },
+    cardListSection
+  );
+  
+  cardsList.renderItems();
+
+}
+)
 
 //Create popupImage
 const popupImage = new PopupWithImage('.popup_type_preview');
@@ -97,23 +122,4 @@ addFormValidator.enableValidation();
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
-
-//Create instance of Section for initial cards
-const cardsList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card({
-      data: item,
-      handleCardClick: (item) => { popupImage.open(item) },
-      cardSelector: ".card-template"
-    },
-    );
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
-  },
-},
-  cardListSection
-);
-
-cardsList.renderItems();
 
