@@ -23,7 +23,7 @@
     <main>
         <section class="profile">
             <div class="profile__area">
-                <button class="profile__avatar-button"><img src="<%=require('./images/profile-image-jacques.jpg')%>" alt="Jacques Cousteau" class="profile__image"></button>
+                <img src="<%=require('./images/profile-image-jacques.jpg')%>" alt="Jacques Cousteau" class="profile__image">
                 <div class="profile__name-area">
                     <h1 class="profile__name">Jacques Cousteau</h1>
                     <button aria-label="edit" type="button" class="button profile__edit-button opacity"></button>
@@ -88,8 +88,8 @@
                 <button aria-label="close" type="button" class="popup__close-button opacity"></button>
                 <h2 class="popup__heading">Change profile picture</h2>
                 <form class="form" name="changeProfilePicture" novalidate>
-                    <label for="proflie-link" class="form__label">
-                        <input type="url" class="form__input form__input_type_link" id="profile-link" name="profile-link"
+                    <label for="profile-link" class="form__label">
+                        <input type="url" class="form__input form__input_type_link" id="profile-link" name="link"
                             placeholder="Profile image link" required>
                             <span class="form__error" id="profile-link-error"></span>    
                         </label> 
