@@ -14,7 +14,7 @@ class Api {
   }
 
   _handleErrorResponse(err) {
-    console.log("this is an error", err)
+    console.log("Error:", err)
   }
 
   getInitialCards() {
@@ -26,7 +26,7 @@ class Api {
   }
 
   addCard(data) {
-    return fetch(this_baseUrl, {
+    return fetch(`${this_baseUrl}cards`, {
       headers: this._headers,
       method: "POST",
       body: JSON.stringify(data),
@@ -46,27 +46,39 @@ class Api {
     .catch(this._handleErrorResponse)
   }
 
-  getUserInfo() {
+  getUser() {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers,
-      method: "GET",
     })
       .then(this._handleResponse)
       .catch(this._handleErrorResponse)
   }
 
-  editUserInfo() {
+  setUser(name, about) {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        name: "me",
-        about: "title"
+        name,
+        about
       })
     })
       .then(this._handleResponse)
       .catch(this._handleErrorResponse)
   }
+
+
+setAvatar(avatar) {
+  return fetch(`${this._baseUrl}users/me/avatar`, {
+    headers: this._headers,
+    method: "PATCH",
+    body: JSON.stringify({
+      avatar
+    })
+  })
+    .then(this._handleResponse)
+    .catch(this._handleErrorResponse)
+}
 
 }
 
