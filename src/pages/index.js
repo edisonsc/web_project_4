@@ -27,7 +27,7 @@ const deleteButton = document.querySelector(".photo-grid__delete-icon");
 const cardListSection = ".photo-grid";
 
 //Avatar image
-const avatarImage = document.querySelector(".profile-image")
+const avatarImage = document.querySelector(".profile__image")
 
 //Api
 const config = {
@@ -64,7 +64,7 @@ api.getInitialCards().then((res) => {
 
 //set user information
 api.getUser().then((res) => {
-  
+  const user = new UserInfo()
 
  
 })
@@ -132,10 +132,10 @@ addButton.addEventListener("click", () => { addPlacePopup.open() })
 const editAvatarPopup = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
   handleFormSubmit: (data) => {
-    const avatarLink = data.link;
-    api.setAvatar(avatarLink)
+    const avatarUrl = data.link;
+    api.setAvatar(avatarUrl)
     .then((data) => {
-      avatarImage.src = avatarLink;
+      avatarImage.src = avatarUrl;
       editAvatarPopup.close();
     })
   }
