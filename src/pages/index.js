@@ -7,9 +7,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js"
-import {
-  cardListSection,
-} from "../components/utils.js";
 
 //Modal Selectors
 const editModal = document.querySelector(".popup_type_edit");
@@ -24,8 +21,13 @@ const addForm = addModal.querySelector(".form");
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const editAvatarButton = document.querySelector(".profile__avatar-button");
-const deleteButton = document.querySelector(".photo-grid__delete-icon")
+const deleteButton = document.querySelector(".photo-grid__delete-icon");
 
+//card List Section
+const cardListSection = ".photo-grid";
+
+//Avatar image
+const avatarImage = document.querySelector(".profile-image")
 
 //Api
 const config = {
@@ -61,22 +63,22 @@ api.getInitialCards().then((res) => {
 )
 
 //set user information
+api.getUser().then((res) => {
+  
 
-
-api.getUserInfo().then((res) => {
-  const profile = new UserInfo(res)
+ 
 })
-
 const editProfilePopup = new PopupWithForm(
   {
     popupSelector: ".popup_type_edit",
-    handleFormSubmit: (data) => {
-      profile.getUserInfo(data['input-name'], data['input-title'])
+    handleFormSubmit: (res) => {
+      profile.setUserInfo(res.name, res.about)
     }
   })
 
+
 editProfilePopup.setEventListeners();
-editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(api.editUserInfo()); editProfilePopup.open() })
+editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profile.getUserInfo()); editProfilePopup.open() })
 
 
 
@@ -127,13 +129,20 @@ addPlacePopup.setEventListeners();
 addButton.addEventListener("click", () => { addPlacePopup.open() })
 
 //Create edit profile avatar popup
-const editAvatar = new PopupWithForm({
+const editAvatarPopup = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
-  handleFormSubmit: console.log("clicked")
+  handleFormSubmit: (data) => {
+    const avatarLink = data.link;
+    api.setAvatar(avatarLink)
+    .then((data) => {
+      avatarImage.src = avatarLink;
+      editAvatarPopup.close();
+    })
+  }
 })
 
-editAvatar.setEventListeners();
-editAvatarButton.addEventListener("click", () => { editAvatar.open()})
+editAvatarPopup.setEventListeners();
+avatarImage.addEventListener("click", () => { editAvatarPopup.open()})
 
 //Validation
 const formValidationSettings = {
