@@ -20,7 +20,7 @@ const addForm = addModal.querySelector(".form");
 //Button selectors
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
-const editAvatarButton = document.querySelector(".profile__avatar-button");
+const avatarButton = document.querySelector(".profile__avatar-button");
 const deleteButton = document.querySelector(".photo-grid__delete-icon");
 
 //card List Section
@@ -142,7 +142,7 @@ const editAvatarPopup = new PopupWithForm({
 })
 
 editAvatarPopup.setEventListeners();
-avatarImage.addEventListener("click", () => { editAvatarPopup.open()})
+avatarButton.addEventListener("click", () => { editAvatarPopup.open()})
 
 //Validation
 const formValidationSettings = {
