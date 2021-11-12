@@ -68,6 +68,7 @@ api.getInitialCards().then((res) => {
 )
 //Set user data and avatar image
 api.getUser().then((res) => {
+  console.log(res)
   const user = new UserInfo({
     nameSelector: '.profile__name',
     titleSelector: '.profile__title',
@@ -84,6 +85,7 @@ api.getUser().then((res) => {
       handleFormSubmit: (data) => {
         const name = data.name;
         const about = data.about;
+        
         api.setUser(name, about)
           .then((res) => {
             profileName.textContent = name;
@@ -92,7 +94,7 @@ api.getUser().then((res) => {
       }
     })
   editProfilePopup.setEventListeners();
-  editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(res); editProfilePopup.open() })
+  editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(res), editProfilePopup.open() })
 })
 
 //Create popupImage

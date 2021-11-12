@@ -55,13 +55,12 @@ class Api {
       .catch(this._handleErrorResponse)
   }
 
-  setUser(name, about) {
+  setUser(name, about, avatar) {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        name: "Sarah",
-        about: "Developer",
+       name, about, avatar
       })
     })
       .then(this._handleResponse)
