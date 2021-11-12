@@ -3,6 +3,7 @@ class Card {
         this._name = data.name;
         this._link = data.link;
         this._id = data._id;
+        this._likes = data.likes;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
     }
@@ -28,7 +29,7 @@ class Card {
     _setEventListeners() {
         //set up events
         this._element.querySelector('.photo-grid__heart-icon').addEventListener("click", () => { this._handleLikeCard() });
-        this._element.querySelector('.photo-grid__delete-icon').addEventListener("click", () => { this._handleRemoveCard() });
+        // this._element.querySelector('.photo-grid__delete-icon').addEventListener("click", () => { this._handleRemoveCard() });
         this._element.querySelector('.photo-grid__image').addEventListener("click", () => { this._handleCardClick({ link: this._link, name: this._name }) });
 
     }
@@ -43,6 +44,8 @@ class Card {
         this._element.querySelector('.photo-grid__image').alt = this._name;
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
+        
+        this._element.querySelector('.photo-grid__text').textContent = this._likes
 
         return this._element
     }
