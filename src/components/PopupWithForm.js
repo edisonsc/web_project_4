@@ -21,8 +21,8 @@ class PopupWithForm extends Popup {
   }
 
   setDefaultValues(user) {
-    this._popupElement.querySelector(".form__input_type_name").value = user['name']
-    this._popupElement.querySelector(".form__input_type_title").value = user['title']
+    this._popupElement.querySelector(".form__input_type_name").value = user.name
+    this._popupElement.querySelector(".form__input_type_title").value = user.about
 
   }
 
