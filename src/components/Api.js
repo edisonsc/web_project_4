@@ -39,7 +39,9 @@ class Api {
     return fetch(`${this._baseUrl}cards/${_id}`, {
       headers: this._headers,
       method: "DELETE",
-      body: JSON.stringify(_id),
+      body: JSON.stringify({
+       _id
+      }),
     })
     .then(this._handleResponse)
     .catch(this._handleErrorResponse)
