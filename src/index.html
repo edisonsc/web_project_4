@@ -41,15 +41,15 @@
                 <button aria-label="close" type="button" class="popup__close-button opacity"></button>
                 <h2 class="popup__heading">Edit profile</h2>
                 <form class="form" name="editInformation" novalidate>
-                    <label for="input-name" class="form__label">
-                    <input type="text" class="form__input form__input_type_name" id="input-name" name="input-name"
+                    <label for="name" class="form__label">
+                    <input type="text" class="form__input form__input_type_name" id="name" name="name"
                         placeholder="Name" minlength="2" maxlength="40" required>
-                        <span class="form__error" id="input-name-error"></span>
+                        <span class="form__error" id="name-error"></span>
                     </label>
-                    <label for="input-title" class="form__label">
-                    <input type="text" class="form__input form__input_type_title" id="input-title" name="input-title"
+                    <label for="about" class="form__label">
+                    <input type="text" class="form__input form__input_type_title" id="about" name="about"
                         placeholder="About me" minlength="2" maxlength="200" required>
-                        <span class="form__error" id="input-title-error"></span>
+                        <span class="form__error" id="about-error"></span>
                     </label>
                     <button type="submit" class="form__button opacity" id="save-button">Save</button>
                 </form>
@@ -88,10 +88,10 @@
                 <button aria-label="close" type="button" class="popup__close-button opacity"></button>
                 <h2 class="popup__heading">Change profile picture</h2>
                 <form class="form" name="changeProfilePicture" novalidate>
-                    <label for="profile-link" class="form__label">
-                        <input type="url" class="form__input form__input_type_link" id="profile-link" name="link"
+                    <label for="link" class="form__label">
+                        <input type="url" class="form__input form__input_type_link" id="link" name="link"
                             placeholder="Profile image link" required>
-                            <span class="form__error" id="profile-link-error"></span>    
+                            <span class="form__error" id="link-error"></span>    
                         </label> 
                     <button type="submit" class="form__button opacity" id="save-button">Save</button>
                 </form>
@@ -117,7 +117,10 @@
             <img class="photo-grid__image">
             <div class="photo-grid__content">
                 <h2 class="photo-grid__title"></h2>
+                <div class="photo-grid__likes">
                 <button aria-label="like" type="button" id="like" class="photo-grid__heart-icon opacity"></button>
+                <p class="photo-grid__text"></p>
+            </div>
             </div>
         </li>
     </template>
