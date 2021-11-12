@@ -44,8 +44,11 @@ const config = {
 const api = new Api(config);
 
 
+
+
 //Load initial cards from Api
 api.getInitialCards().then((res) => {
+  
   const cardsList = new Section({
     items: res,
     renderer: (item) => {
@@ -99,45 +102,46 @@ const popupImage = new PopupWithImage('.popup_type_preview');
 popupImage.setEventListeners();
 
 //Create confirm delete popup
-// const confirmDeletePopup = new PopupWithForm(
-//   {
-//     popupSelector: ".popup_type_delete",
-//     handleFormSubmit: (data) => {
-//       const cardId = data._id
-//       api.deleteCard(cardId)
-//       .then((data) => {
-//         cardId.remove();
-//         cardId = null;
-//       })
-//     }
-//   }
-// )
+ const confirmDeletePopup = new PopupWithForm(
+   {
+     popupSelector: ".popup_type_delete",
+     handleFormSubmit: (data) => {
+      const cardId = data.owner._id
+      api.deleteCard(cardId)
+      .then((data) => {
+       cardId.remove()
+       cardId = null
+       })
+     }
+   }
+ )
 
-// confirmDeletePopup.setEventListeners();
-// deleteButton.addEventListener("click", () => {confirmDeletePopup.open()})
+
+ confirmDeletePopup.setEventListeners();
+ deleteButton.addEventListener("click", () => {confirmDeletePopup.open()})
 
 //Create add new place popup
 
 const addPlacePopup = new PopupWithForm({
   popupSelector: ".popup_type_add",
   handleFormSubmit: (data) => {
-    const newPlace = { name: data.name, link: data.link }
+    const newPlace = { name: data.name, link: data.link, likes: data.likes } 
+
     api.addCard(newPlace)
       .then((data) => {
-        const card = new Card({
+          const card = new Card({
           data: newPlace,
           handleCardClick: (newPlace) => { popupImage.open(newPlace) },
           cardSelector: ".card-template"
         },
         );
         const cardElement = card.generateCard();
-        
+        cardListSection.addItem(card)
       },
       )
     }}
 )
   
-
 addPlacePopup.setEventListeners();
 addButton.addEventListener("click", () => { addPlacePopup.open() })
 
