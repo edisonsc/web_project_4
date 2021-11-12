@@ -89,6 +89,8 @@ setAvatar(avatar) {
     .catch(this._handleErrorResponse)
 }
 
+
+
 }
 
 export default Api

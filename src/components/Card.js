@@ -2,8 +2,8 @@ class Card {
     constructor({ data, handleCardClick, cardSelector }) {
         this._name = data.name;
         this._link = data.link;
-        this._id = data.owner._id;
-        this._likes = data.owner.likes;
+        this._cardId = data._id;
+        this._likes = data.likes;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
     }
@@ -47,7 +47,7 @@ class Card {
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
         
-        this._element.querySelector('.photo-grid__text').textContent = this._likes;
+        this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
 
         return this._element
     }

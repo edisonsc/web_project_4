@@ -44,11 +44,9 @@ const config = {
 const api = new Api(config);
 
 
-
-
 //Load initial cards from Api
 api.getInitialCards().then((res) => {
-  
+  console.log(res)
   const cardsList = new Section({
     items: res,
     renderer: (item) => {
@@ -116,9 +114,8 @@ popupImage.setEventListeners();
    }
  )
 
-
  confirmDeletePopup.setEventListeners();
- deleteButton.addEventListener("click", () => {confirmDeletePopup.open()})
+//  deleteButton.addEventListener("click", () => {confirmDeletePopup.open()})
 
 //Create add new place popup
 
