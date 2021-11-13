@@ -17,6 +17,7 @@ class Api {
     console.log("Error:", err)
   }
 
+
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       headers: this._headers,
@@ -37,6 +38,30 @@ class Api {
 
   deleteCard(_id) {
     return fetch(`${this._baseUrl}cards/${_id}`, {
+      headers: this._headers,
+      method: "DELETE",
+      body: JSON.stringify({
+       _id
+      }),
+    })
+    .then(this._handleResponse)
+    .catch(this._handleErrorResponse)
+  }
+
+  addLike(_id) {
+    return fetch(`${this._baseUrl}cards/likes/${_id}`, {
+      headers: this._headers,
+      method: "PUT",
+      body: JSON.stringify({
+       _id
+      }),
+    })
+    .then(this._handleResponse)
+    .catch(this._handleErrorResponse)
+  }
+
+  deleteLike(_id) {
+    return fetch(`${this._baseUrl}cards/likes/${_id}`, {
       headers: this._headers,
       method: "DELETE",
       body: JSON.stringify({
