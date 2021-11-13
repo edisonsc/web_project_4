@@ -20,12 +20,14 @@ class PopupWithForm extends Popup {
     super.close();
   }
 
-  setDefaultValues(user) {
-    this._popupElement.querySelector(".form__input_type_name").value = user.name
-    this._popupElement.querySelector(".form__input_type_title").value = user.about
-
+  setDefaultValues(name, about) {
+    this._popupElement.querySelector(".form__input_type_name").value = name
+    this._popupElement.querySelector(".form__input_type_title").value = about
   }
 
+  setCardId(id){
+    this._popupElement.querySelector(".form__input_type_card-id").value = id
+  }
 
   _getInputValues() {
     this._inputList = this._popupElement.querySelectorAll(".form__input")
