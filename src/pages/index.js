@@ -45,28 +45,28 @@ const api = new Api(config);
 
 //create a new card from Card class
 function createNewCard(item) {
- return  new Card({
-  data: item,
-  handleCardClick: (item) => { popupImage.open(item) },
-  handleLikeCard: (item) => {  
-console.log(item)
-     if (item._cardLiked) { 
-       api.deleteLike(item._cardId)
-       .then((res) => {
-        item.updateCount(res)
-       })
-     }
-     else {
-      api.addLike(item._cardId)
-      .then((res) => {
-        item.updateCount(res)
-      })
-     }
+  return new Card({
+    data: item,
+    handleCardClick: (item) => { popupImage.open(item) },
+    handleLikeCard: (item) => {
+      console.log(item)
+      if (item._cardLiked) {
+        api.deleteLike(item._cardId)
+          .then((res) => {
+            item.updateCount(res)
+          })
+      }
+      else {
+        api.addLike(item._cardId)
+          .then((res) => {
+            item.updateCount(res)
+          })
+      }
     },
-  handleRemoveCard: (item) => { confirmDeletePopup.setCardId(item.id), confirmDeletePopup.open() },
-  cardSelector: ".card-template"
-},
-);
+    handleRemoveCard: (item) => { confirmDeletePopup.setCardId(item.id), confirmDeletePopup.open() },
+    cardSelector: ".card-template"
+  },
+  );
 }
 
 let cardsList = "";
@@ -89,21 +89,21 @@ api.getUser().then((user) => {
     cardsList.renderItems();
   }
   )
-//Create add new place popup
-//add a new card
+  //Create add new place popup
+  //add a new card
   const addPlacePopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
+    formButton: "Create",
     handleFormSubmit: (data) => {
-
       const newPlace = { name: data.name, link: data.link }
-
       api.addCard(newPlace)
         .then((newCard) => {
-          const card = createNewCard (newCard) 
+          const card = createNewCard(newCard)
           const cardElement = card.generateCard(user._id)
           cardsList.addItem(cardElement);
         }
         )
+        .finally(addPlacePopup.close())
     }
   }
   )
@@ -115,7 +115,9 @@ api.getUser().then((user) => {
 const confirmDeletePopup = new PopupWithForm(
   {
     popupSelector: ".popup_type_delete",
+    formButton: "Yes",
     handleFormSubmit: (data) => {
+      console.log(data)
       api.deleteCard(data.id);
       cardsList.removeItem(data.id)
     }
@@ -138,22 +140,22 @@ api.getUser().then((res) => {
   const editProfilePopup = new PopupWithForm(
     {
       popupSelector: ".popup_type_edit",
+      formButton: "Save",
       handleFormSubmit: (data) => {
         const name = data.name;
         const about = data.about;
-
         api.setUser(name, about)
           .then((res) => {
             profileName.textContent = name;
             profileTitle.textContent = about;
           })
+          .finally(editProfilePopup.close())
       }
     })
-    editProfilePopup.setEventListeners();
-    editProfilePopup._rendering(true, "Save");
-    editButton.addEventListener("click", () => { 
-    editProfilePopup.setDefaultValues(profileName.textContent, profileTitle.textContent), 
-    editProfilePopup.open() 
+  editProfilePopup.setEventListeners();
+  editButton.addEventListener("click", () => {
+    editProfilePopup.setDefaultValues(profileName.textContent, profileTitle.textContent),
+      editProfilePopup.open()
   })
 })
 
@@ -164,13 +166,14 @@ popupImage.setEventListeners();
 //Creat popup to edit avatar
 const editAvatarPopup = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
+  formButton: "Save",
   handleFormSubmit: (data) => {
     const avatarUrl = data.link;
     api.setAvatar(avatarUrl)
       .then((data) => {
         avatarImage.src = avatarUrl;
-        editAvatarPopup.close();
       })
+      .finally(editAvatarPopup.close())
   }
 })
 
