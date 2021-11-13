@@ -22,7 +22,7 @@ const addForm = addModal.querySelector(".form");
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const avatarButton = document.querySelector(".profile__avatar-button");
-const deleteButton = document.querySelector(".photo-grid__delete-icon");
+
 
 //card List Section
 const cardListSection = ".photo-grid";
@@ -43,20 +43,21 @@ const config = {
 
 const api = new Api(config);
 
-
+api.getUser().then((user) => {
 //Load initial cards from Api
 api.getInitialCards().then((res) => {
-  console.log(res)
   const cardsList = new Section({
     items: res,
     renderer: (item) => {
       const card = new Card({
         data: item,
         handleCardClick: (item) => { popupImage.open(item) },
+        handleLikeCard: (item) => {console.log("click")}, 
+        handleRemoveCard: (item) => {console.log(item); confirmDeletePopup.setCardId(item.id), confirmDeletePopup.open() },
         cardSelector: ".card-template"
       },
       );
-      const cardElement = card.generateCard();
+      const cardElement = card.generateCard(user._id);
       cardsList.addItem(cardElement);
     },
   },
@@ -65,10 +66,11 @@ api.getInitialCards().then((res) => {
 
   cardsList.renderItems();
 }
-)
+)//this is done
+})
+
 //Set user data and avatar image
 api.getUser().then((res) => {
-  console.log(res)
   const user = new UserInfo({
     nameSelector: '.profile__name',
     titleSelector: '.profile__title',
@@ -85,7 +87,7 @@ api.getUser().then((res) => {
       handleFormSubmit: (data) => {
         const name = data.name;
         const about = data.about;
-        
+
         api.setUser(name, about)
           .then((res) => {
             profileName.textContent = name;
@@ -94,7 +96,8 @@ api.getUser().then((res) => {
       }
     })
   editProfilePopup.setEventListeners();
-  editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(res), editProfilePopup.open() })
+  editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profileName.textContent, profileTitle.textContent), editProfilePopup.open() })
+
 })
 
 //Create popupImage
@@ -102,47 +105,46 @@ const popupImage = new PopupWithImage('.popup_type_preview');
 popupImage.setEventListeners();
 
 //Create confirm delete popup
- const confirmDeletePopup = new PopupWithForm(
-   {
-     popupSelector: ".popup_type_delete",
-     handleFormSubmit: (data) => {
-      const cardId = data.owner._id
-      api.deleteCard(cardId)
-      .then((data) => {
-       cardId.remove()
-       cardId = null
-       })
-     }
-   }
- )
+const confirmDeletePopup = new PopupWithForm(
+  {
+    popupSelector: ".popup_type_delete",
+    handleFormSubmit: (data) => {
+      api.deleteCard(data.id);
 
- confirmDeletePopup.setEventListeners();
-//  deleteButton.addEventListener("click", () => {confirmDeletePopup.open()})
+    }
+  }
+)
+confirmDeletePopup.setEventListeners();
+
+
+
 
 //Create add new place popup
-
+//add a new place
 const addPlacePopup = new PopupWithForm({
   popupSelector: ".popup_type_add",
   handleFormSubmit: (data) => {
-    const newPlace = { name: data.name, link: data.link, likes: data.likes } 
+  
+    const newPlace = { name: data.name, link: data.link, likes: [] }
 
     api.addCard(newPlace)
       .then((data) => {
-          const card = new Card({
-          data: newPlace,
-          handleCardClick: (newPlace) => { popupImage.open(newPlace) },
+        const card = new Card({
+          data: data,
+          handleCardClick: (data) => { popupImage.open(data) },
           cardSelector: ".card-template"
         },
         );
-        const cardElement = card.generateCard();
-        cardListSection.addItem(card)
-      },
+        const cardElement = card.generateCard()
+      }
       )
-    }}
+  }
+}
 )
-  
+
 addPlacePopup.setEventListeners();
 addButton.addEventListener("click", () => { addPlacePopup.open() })
+
 
 //Create edit profile avatar popup
 const editAvatarPopup = new PopupWithForm({
