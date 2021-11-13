@@ -43,33 +43,87 @@ const config = {
 
 const api = new Api(config);
 
-api.getUser().then((user) => {
-//Load initial cards from Api
-api.getInitialCards().then((res) => {
-  const cardsList = new Section({
-    items: res,
-    renderer: (item) => {
-      const card = new Card({
-        data: item,
-        handleCardClick: (item) => { popupImage.open(item) },
-        handleLikeCard: (item) => {console.log("click")}, 
-        handleRemoveCard: (item) => {console.log(item); confirmDeletePopup.setCardId(item.id), confirmDeletePopup.open() },
-        cardSelector: ".card-template"
-      },
-      );
-      const cardElement = card.generateCard(user._id);
-      cardsList.addItem(cardElement);
+//create a new card from Card class
+function createNewCard(item) {
+ return  new Card({
+  data: item,
+  handleCardClick: (item) => { popupImage.open(item) },
+  handleLikeCard: (item) => {  
+console.log(item)
+     if (item._cardLiked) { 
+       api.deleteLike(item._cardId)
+       .then((res) => {
+        item.updateCount(res)
+       })
+     }
+     else {
+      api.addLike(item._cardId)
+      .then((res) => {
+        item.updateCount(res)
+      })
+     }
     },
-  },
-    cardListSection
-  );
-
-  cardsList.renderItems();
+  handleRemoveCard: (item) => { confirmDeletePopup.setCardId(item.id), confirmDeletePopup.open() },
+  cardSelector: ".card-template"
+},
+);
 }
-)//this is done
+
+let cardsList = "";
+
+//Get user info and load initial cards
+api.getUser().then((user) => {
+  api.getInitialCards().then((res) => {
+    res.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+    cardsList = new Section({
+      items: res,
+      renderer: (item) => {
+        const card = createNewCard(item)
+        const cardElement = card.generateCard(user._id);
+        cardsList.addItem(cardElement);
+      },
+    },
+      cardListSection
+    );
+
+    cardsList.renderItems();
+  }
+  )
+//Create add new place popup
+//add a new card
+  const addPlacePopup = new PopupWithForm({
+    popupSelector: ".popup_type_add",
+    handleFormSubmit: (data) => {
+
+      const newPlace = { name: data.name, link: data.link }
+
+      api.addCard(newPlace)
+        .then((newCard) => {
+          const card = createNewCard (newCard) 
+          const cardElement = card.generateCard(user._id)
+          cardsList.addItem(cardElement);
+        }
+        )
+    }
+  }
+  )
+  addPlacePopup.setEventListeners();
+  addButton.addEventListener("click", () => { addPlacePopup.open() })
 })
 
-//Set user data and avatar image
+//Create confirm delete popup
+const confirmDeletePopup = new PopupWithForm(
+  {
+    popupSelector: ".popup_type_delete",
+    handleFormSubmit: (data) => {
+      api.deleteCard(data.id);
+      cardsList.removeItem(data.id)
+    }
+  }
+)
+confirmDeletePopup.setEventListeners();
+
+//Set initial user data and avatar image
 api.getUser().then((res) => {
   const user = new UserInfo({
     nameSelector: '.profile__name',
@@ -79,7 +133,7 @@ api.getUser().then((res) => {
   user.setUserInfo(res)
 })
 
-//Create editProfilePopup and set initial values
+//Create popup to edit profile information 
 api.getUser().then((res) => {
   const editProfilePopup = new PopupWithForm(
     {
@@ -95,58 +149,19 @@ api.getUser().then((res) => {
           })
       }
     })
-  editProfilePopup.setEventListeners();
-  editButton.addEventListener("click", () => { editProfilePopup.setDefaultValues(profileName.textContent, profileTitle.textContent), editProfilePopup.open() })
-
+    editProfilePopup.setEventListeners();
+    editProfilePopup._rendering(true, "Save");
+    editButton.addEventListener("click", () => { 
+    editProfilePopup.setDefaultValues(profileName.textContent, profileTitle.textContent), 
+    editProfilePopup.open() 
+  })
 })
 
-//Create popupImage
+//Create popup to preview image
 const popupImage = new PopupWithImage('.popup_type_preview');
 popupImage.setEventListeners();
 
-//Create confirm delete popup
-const confirmDeletePopup = new PopupWithForm(
-  {
-    popupSelector: ".popup_type_delete",
-    handleFormSubmit: (data) => {
-      api.deleteCard(data.id);
-
-    }
-  }
-)
-confirmDeletePopup.setEventListeners();
-
-
-
-
-//Create add new place popup
-//add a new place
-const addPlacePopup = new PopupWithForm({
-  popupSelector: ".popup_type_add",
-  handleFormSubmit: (data) => {
-  
-    const newPlace = { name: data.name, link: data.link, likes: [] }
-
-    api.addCard(newPlace)
-      .then((data) => {
-        const card = new Card({
-          data: data,
-          handleCardClick: (data) => { popupImage.open(data) },
-          cardSelector: ".card-template"
-        },
-        );
-        const cardElement = card.generateCard()
-      }
-      )
-  }
-}
-)
-
-addPlacePopup.setEventListeners();
-addButton.addEventListener("click", () => { addPlacePopup.open() })
-
-
-//Create edit profile avatar popup
+//Creat popup to edit avatar
 const editAvatarPopup = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
   handleFormSubmit: (data) => {
