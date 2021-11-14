@@ -75,7 +75,7 @@ function createNewCard(item) {
 }
 
 //Get user info and load initial cards
-api.getUser().then((user) => {
+api.promiseAll.then((user) => {
   api.getInitialCards().then((res) => {
     res.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
  

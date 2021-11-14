@@ -13,7 +13,6 @@ class PopupWithForm extends Popup {
       evt.preventDefault();
       this._popupElement.querySelector(".form__button").textContent = "Saving..."
       this._handleFormSubmit(this._getInputValues());
-      //this.close()
     })
     super.setEventListeners();
   }
@@ -24,21 +23,11 @@ class PopupWithForm extends Popup {
     super.close();
   }
 
-  setDefaultValues(name, about) {
-    this._popupElement.querySelector(".form__input_type_name").value = name
-    this._popupElement.querySelector(".form__input_type_title").value = about
-  }
-
-  setCardId(id){
-    this._popupElement.querySelector(".form__input_type_card-id").value = id
-  }
-
   _getInputValues() {
     this._inputList = this._popupElement.querySelectorAll(".form__input")
     this._formValues = {};
     this._inputList.forEach((input) => {
       this._formValues[input.name] = input.value;
-      this._formValues[input.about] = input.value;
     })
     return this._formValues
   }
