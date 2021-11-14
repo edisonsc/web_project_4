@@ -25,7 +25,7 @@ class Card {
         //set up events
         this._element.querySelector('.photo-grid__heart-icon').addEventListener("click",
             () => {
-                this._handleLikeCard( this );
+                this._handleLikeCard(this);
             })
 
         this._element.querySelector('.photo-grid__delete-icon').addEventListener("click",
@@ -40,10 +40,15 @@ class Card {
 
     };
 
-    updateCount(res){     
+    removeCard() {
+        this._element.remove();
+        this._element = null;
+    }
+
+    updateCount(res) {
         this._element.querySelector('.photo-grid__text').textContent = res.likes.length;
-         this._cardLiked = !this._cardLiked;
-         this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active')       
+        this._cardLiked = !this._cardLiked;
+        this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active')
     }
 
     generateCard(user) {
@@ -59,7 +64,7 @@ class Card {
 
         this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
 
-       
+
         this._likes.forEach(like => {
             if (like._id === user) {
                 this._cardLiked = true;
