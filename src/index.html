@@ -23,7 +23,7 @@
     <main>
         <section class="profile">
             <div class="profile__area">
-               <button type="button" aria-label="avatar" class="button profile__avatar-button"><img src="" alt="Jacques Cousteau" class="profile__image"></button>
+               <button type="button" aria-label="avatar" class="button profile__avatar-button"><img src="<%=require('./images/profile-image-jacques.jpg')%>" alt="Jacques Cousteau" class="profile__image"></button>
                 <div class="profile__name-area">
                     <h1 class="profile__name"></h1>
                     <button aria-label="edit" type="button" class="button profile__edit-button opacity"></button>
@@ -89,11 +89,11 @@
                 <h2 class="popup__heading">Change profile picture</h2>
                 <form class="form" name="changeProfilePicture" novalidate>
                     <label for="link" class="form__label">
-                        <input type="url" class="form__input form__input_type_link" id="link" name="link"
+                        <input type="url" class="form__input form__input_type_link" id="avatar-link" name="link"
                             placeholder="Profile image link" required>
-                            <span class="form__error" id="link-error"></span>    
+                            <span class="form__error" id="avatar-link-error"></span>    
                         </label> 
-                    <button type="submit" class="form__button opacity" id="save-button">Save</button>
+                    <button type="submit" class="form__button opacity" id="avatar-save-button">Save</button>
                 </form>
             </div>
         </section>
@@ -103,7 +103,7 @@
                 <h2 class="popup__heading">Are you sure?</h2>
                 <form class="form" name="confirmDelete" novalidate>
                     <input type="hidden" class="form__input form__input_type_card-id" id="id" name="id">
-                    <button type="submit" class="form__button opacity" id="save-button">Yes</button>
+                    <button type="submit" class="form__button opacity" id="delete-save-button">Yes</button>
                 </form>
             </div>
         </section>
