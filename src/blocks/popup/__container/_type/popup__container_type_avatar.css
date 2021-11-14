@@ -1,11 +1,11 @@
-.popup__container_type_profile-picture {
+.popup__container_type_avatar {
     width:100%;
     min-height: 272px;
    
   }
   
   @media screen and (min-width: 880px) {
-    .popup__container {
+    .popup__container_type_avatar {
       min-width: 430px;
       min-height: 272px;
       padding: 34px 36px 36.5px;
