@@ -4,8 +4,8 @@ class Card {
         this._link = data.link;
         this._cardId = data._id;
         this._likes = data.likes;
-        this._cardLiked = false;
         this._cardOwner = data.owner._id;
+        this._cardIsLiked = false;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleLikeCard = handleLikeCard;
@@ -45,13 +45,20 @@ class Card {
         this._element = null;
     }
 
-    updateCount(res) {
-        this._element.querySelector('.photo-grid__text').textContent = res.likes.length;
-        this._cardLiked = !this._cardLiked;
-        this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active')
+    _renderLikes(userId){
+        this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
+        const isLiked = this._likes.some(like => like._id === userId)
+        if (isLiked) {
+          this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active'); 
+        } 
     }
 
-    generateCard(user) {
+    updateCount(res) {
+        this._likes = res.likes;
+        this._renderLikes() 
+    }
+
+    generateCard(userId) {
         this._element = this._getTemplate();
 
         this._setEventListeners();
@@ -62,20 +69,11 @@ class Card {
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
 
-        this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
+        this._renderLikes(userId);
 
-
-        this._likes.forEach(like => {
-            if (like._id === user) {
-                this._cardLiked = true;
-                this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active');
-            }
-        })
-
-        if (this._cardOwner !== user) {
+        if (this._cardOwner !== userId) {
             this._element.querySelector('.photo-grid__delete-icon').hidden = true;
         }
-
 
         return this._element
     }
