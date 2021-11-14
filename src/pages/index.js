@@ -12,10 +12,12 @@ import Api from "../components/Api.js"
 //Modal Selectors
 const editModal = document.querySelector(".popup_type_edit");
 const addModal = document.querySelector(".popup_type_add");
+const avatarModal = document.querySelector(".popup_type_avatar");
 
 //Form Selectors
 const editForm = editModal.querySelector(".form");
 const addForm = addModal.querySelector(".form");
+const avatarForm = avatarModal.querySelector(".form")
 
 //Button selectors
 const editButton = document.querySelector(".profile__edit-button");
@@ -193,4 +195,7 @@ addFormValidator.enableValidation();
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(formValidationSettings, avatarForm);
+avatarFormValidator.enableValidation();
 
