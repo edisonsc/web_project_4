@@ -1,28 +1,24 @@
 class Section {
-    constructor({ items, renderer }, containerSelector) {
-        this._items = items;
+    constructor({ renderer }, containerSelector) {
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
-        this._cards = [];
+        this._items = [];
     }
-
 
     addItem(element, id) {
         this._container.prepend(element);
-        this._cards[id] = element;
+        this._items[id] = element;
     }
 
-    removeItem(cardId) {
-        let card = this._cards[cardId]
-        card.remove();
-        card = null
-        this._cards.splice(cardId)
+    removeItem(id) {
+        let item = this._items[id]
+        item.remove();
+        item = null
+        this._items.splice(id)
     }
 
-    renderItems() {
-        this._items.forEach((item) => {
-            this._renderer(item)
-        });
+    renderItems(res) {
+       res.forEach(this._renderer)
     }
 }
 
