@@ -12,7 +12,6 @@ import Api from "../components/Api.js"
 //Modal Selectors
 const editModal = document.querySelector(".popup_type_edit");
 const addModal = document.querySelector(".popup_type_add");
-const previewModal = document.querySelector(".popup_type_preview");
 
 //Form Selectors
 const editForm = editModal.querySelector(".form");
@@ -78,9 +77,9 @@ api.getUser().then((user) => {
     cardsList = new Section({
       items: res,
       renderer: (item) => {
-        const card = createNewCard(item)
+        const card = createNewCard(item,)
         const cardElement = card.generateCard(user._id);
-        cardsList.addItem(cardElement);
+        cardsList.addItem(cardElement, card._cardId);
       },
     },
       cardListSection
@@ -100,7 +99,7 @@ api.getUser().then((user) => {
         .then((newCard) => {
           const card = createNewCard(newCard)
           const cardElement = card.generateCard(user._id)
-          cardsList.addItem(cardElement);
+          cardsList.addItem(cardElement, card._cardId);
         }
         )
         .finally(addPlacePopup.close())
@@ -117,12 +116,11 @@ const confirmDeletePopup = new PopupWithForm(
     popupSelector: ".popup_type_delete",
     formButton: "Yes",
     handleFormSubmit: (data) => {
-      console.log(data)
-      api.deleteCard(data.id);
-      cardsList.removeItem(data.id)
+      api.deleteCard(data.id)
+        .then((res) => { cardsList.removeItem(data.id) })
+        .finally(confirmDeletePopup.close())
     }
-  }
-)
+  })
 confirmDeletePopup.setEventListeners();
 
 //Set initial user data and avatar image
