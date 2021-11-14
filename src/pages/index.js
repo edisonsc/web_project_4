@@ -7,7 +7,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js"
-
+import {config} from "../utils/constants.js"
 
 //Modal Selectors
 const editModal = document.querySelector(".popup_type_edit");
@@ -33,16 +33,19 @@ const avatarImage = document.querySelector(".profile__image");
 const profileName = document.querySelector(".profile__name");
 const profileTitle = document.querySelector(".profile__title")
 
-//Api
-const config = {
-  baseUrl: "https://around.nomoreparties.co/v1/group-11/",
-  headers: {
-    authorization: "ce0cfad9-c022-44c4-8673-897f4eaf9eed",
-    "Content-Type": "application/json"
-  }
-}
+
 
 const api = new Api(config);
+
+const cardsList = new Section({
+  renderer: (item, user) => {
+    const card = createNewCard(item)
+    const cardElement = card.generateCard(user._id);
+    cardsList.addItem(cardElement, card._cardId);
+  },
+},
+  cardListSection
+);
 
 //create a new card from Card class
 function createNewCard(item) {
@@ -50,44 +53,33 @@ function createNewCard(item) {
     data: item,
     handleCardClick: (item) => { popupImage.open(item) },
     handleLikeCard: (item) => {
-      console.log(item)
-      if (item._cardLiked) {
+      if (item._cardId) {
         api.deleteLike(item._cardId)
           .then((res) => {
-            item.updateCount(res)
+            console.log(res)
+            item.updateCount(res._id)
           })
       }
       else {
         api.addLike(item._cardId)
           .then((res) => {
+            console.log(res)
             item.updateCount(res)
           })
       }
     },
-    handleRemoveCard: (item) => { confirmDeletePopup.setCardId(item.id), confirmDeletePopup.open() },
+    handleRemoveCard: (item) => { setCardId(item.id), confirmDeletePopup.open() },
     cardSelector: ".card-template"
   },
   );
 }
 
-let cardsList = "";
-
 //Get user info and load initial cards
 api.getUser().then((user) => {
   api.getInitialCards().then((res) => {
     res.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-    cardsList = new Section({
-      items: res,
-      renderer: (item) => {
-        const card = createNewCard(item,)
-        const cardElement = card.generateCard(user._id);
-        cardsList.addItem(cardElement, card._cardId);
-      },
-    },
-      cardListSection
-    );
-
-    cardsList.renderItems();
+ 
+    cardsList.renderItems(res, user);
   }
   )
   //Create add new place popup
@@ -124,6 +116,9 @@ const confirmDeletePopup = new PopupWithForm(
     }
   })
 confirmDeletePopup.setEventListeners();
+function setCardId(id){
+  confirmDeletePopup._popupElement.querySelector(".form__input_type_card-id").value = id
+}
 
 //Set initial user data and avatar image
 api.getUser().then((res) => {
@@ -152,12 +147,19 @@ api.getUser().then((res) => {
           .finally(editProfilePopup.close())
       }
     })
+  function setDefaultValues(name, about) {
+    editProfilePopup._popupElement.querySelector(".form__input_type_name").value = name
+    editProfilePopup._popupElement.querySelector(".form__input_type_title").value = about
+  };
+
   editProfilePopup.setEventListeners();
   editButton.addEventListener("click", () => {
-    editProfilePopup.setDefaultValues(profileName.textContent, profileTitle.textContent),
-      editProfilePopup.open()
+    setDefaultValues(profileName.textContent, profileTitle.textContent);
+    editProfilePopup.open()
   })
 })
+
+
 
 //Create popup to preview image
 const popupImage = new PopupWithImage('.popup_type_preview');
