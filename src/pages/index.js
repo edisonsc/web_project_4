@@ -33,10 +33,6 @@ const avatarImage = document.querySelector(".profile__image");
 const profileName = document.querySelector(".profile__name");
 const profileTitle = document.querySelector(".profile__title")
 
-function handleErrorResponse(err) {
-  console.log("Error:", err)
-}
-
 const api = new Api(config);
 
 //Get user info and load initial cards
@@ -58,17 +54,20 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
       data: item,
       handleCardClick: (item) => { popupImage.open(item) },
       handleLikeCard: (item) => {
+        console.log(item)
         if (item._cardIsLiked) {
           api.deleteLike(item._cardId)
             .then((res) => {
-              item.updateCount(res, values[0]._id)
+              item.updateCount(res)
             })
+            .catch((err) => console.log(`Error: ${err}`))
         }
         else {
           api.addLike(item._cardId)
             .then((res) => {
-              item.updateCount(res, values[0]._id)
+              item.updateCount(res)
             })
+            .catch((err) => console.log(`Error: ${err}`))
         }
       },
       handleRemoveCard: (item) => { setCardId(item.id), confirmDeletePopup.open() },
@@ -159,7 +158,6 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
   }
 })
   .catch((err) => console.log(err))
-  .finally(() => { })
 
 //EDIT AVATAR POPUP
 const editAvatarPopup = new PopupWithForm({
