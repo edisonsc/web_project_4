@@ -101,7 +101,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
             addPlacePopup.close()
         }
         )
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(`Error: ${err}`))
         .finally(() => { addPlacePopup.stopLoading() })
     }
   }
@@ -138,28 +138,28 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
     editProfilePopup.open()
   })
 
-})
-
-//CONFIRM DELETE POPUP
-const confirmDeletePopup = new PopupWithForm(
-  {
-    popupSelector: ".popup_type_delete",
-    formButton: "Yes",
-    handleFormSubmit: (data) => {
-      api.deleteCard(data.id)
-        .then((res) => {
-          cardsList.removeItem(data.id),
+  //CONFIRM DELETE POPUP
+  const confirmDeletePopup = new PopupWithForm(
+    {
+      popupSelector: ".popup_type_delete",
+      formButton: "Yes",
+      handleFormSubmit: (data) => {
+        api.deleteCard(data.id)
+          .then((res) => {
+            cardsList.removeItem(data.id);
             confirmDeletePopup.close()
-        }
-        )
-        .catch((err) => console.log(err))
-        .finally(() => { confirmDeletePopup.stopLoading() })
-    }
-  })
-confirmDeletePopup.setEventListeners();
-function setCardId(id) {
-  confirmDeletePopup._popupElement.querySelector(".form__input_type_card-id").value = id
-}
+          })
+          .catch((err) => console.log(err))
+          .finally(() => { confirmDeletePopup.stopLoading() })
+      }
+    })
+  confirmDeletePopup.setEventListeners();
+  function setCardId(id) {
+    confirmDeletePopup._popupElement.querySelector(".form__input_type_card-id").value = id
+  }
+})
+  .catch((err) => console.log(err))
+  .finally(() => { })
 
 //EDIT AVATAR POPUP
 const editAvatarPopup = new PopupWithForm({
