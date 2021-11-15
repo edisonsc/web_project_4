@@ -156,12 +156,14 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
     confirmDeletePopup._popupElement.querySelector(".form__input_type_card-id").value = id
   }
 
+})
+
 //Creat popup to edit avatar
 const editAvatarPopup = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
   formButton: "Save",
   handleFormSubmit: (data) => {
-    const avatarUrl = data.avatar-link;
+    const avatarUrl = data.avatarLink;
     api.setAvatar(avatarUrl)
       .then((data) => {
         avatarImage.src = avatarUrl,
@@ -169,13 +171,11 @@ const editAvatarPopup = new PopupWithForm({
       }
       )
       .catch((err) => console.log(err))
-      .finally(() => { editAvatarPopup.stopLoading() })
   }
 
 })
 editAvatarPopup.setEventListeners();
 avatarButton.addEventListener("click", () => { editAvatarPopup.open() })
-})
 //Create popup to preview image
 const popupImage = new PopupWithImage('.popup_type_preview');
 popupImage.setEventListeners();
