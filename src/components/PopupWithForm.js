@@ -18,12 +18,11 @@ class PopupWithForm extends Popup {
 
   close() {
     this._popupElement.querySelector(".form").reset();
-    this._popupElement.querySelector(".form__button").textContent = this._formButton;
     super.close();
   }
 
   stopLoading() {
-    
+    this._popupElement.querySelector(".form__button").textContent = this._formButton;
   }
 
   _getInputValues() {
