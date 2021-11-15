@@ -5,11 +5,11 @@ class Card {
         this._cardId = data._id;
         this._likes = data.likes;
         this._cardOwner = data.owner._id;
-        this._cardIsLiked = false;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleLikeCard = handleLikeCard;
-        this._handleRemoveCard = handleRemoveCard
+        this._handleRemoveCard = handleRemoveCard;
+        this._cardIsLiked = false;
     }
 
     _getTemplate() {
@@ -45,26 +45,16 @@ class Card {
         this._element = null;
     }
 
-    _renderLikes(userId) {
-        this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
-        this._likes.forEach(like => { 
 
-            if (like._id === userId) { 
+    updateCount(res) { 
 
-                this._cardIsLiked = true; 
+        this._element.querySelector('.photo-grid__text').textContent = res.likes.length; 
 
-                this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active'); 
+        this._cardIsLiked = !this._cardIsLiked; 
 
-            } 
+        this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active') 
 
-        }) 
-    }
-
-    updateCount(res, userId) {
-        this._likes = res.likes;
-        this._cardIsLiked = !this._cardIsLiked;
-        this._renderLikes(userId);    
-    }
+    } 
 
     generateCard(userId) {
         this._element = this._getTemplate();
@@ -77,7 +67,19 @@ class Card {
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
 
-        this._renderLikes(userId);
+        this._element.querySelector('.photo-grid__text').textContent = this._likes.length; 
+
+        this._likes.forEach(like => { 
+
+            if (like._id === userId) { 
+
+                this._cardLiked = true; 
+
+                this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active'); 
+
+            } 
+
+        }) 
 
         if (this._cardOwner !== userId) {
             this._element.querySelector('.photo-grid__delete-icon').hidden = true;
