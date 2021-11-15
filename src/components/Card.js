@@ -45,17 +45,25 @@ class Card {
         this._element = null;
     }
 
-    _renderLikes(userId){
+    _renderLikes(userId) {
         this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
-        const isLiked = this._likes.some(like => like._id === userId)
-        if (isLiked) {
-          this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active'); 
-        } 
+        this._likes.forEach(like => { 
+
+            if (like._id === userId) { 
+
+                this._cardIsLiked = true; 
+
+                this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active'); 
+
+            } 
+
+        }) 
     }
 
-    updateCount(res) {
+    updateCount(res, userId) {
         this._likes = res.likes;
-        this._renderLikes() 
+        this._cardIsLiked = !this._cardIsLiked;
+        this._renderLikes(userId);    
     }
 
     generateCard(userId) {
