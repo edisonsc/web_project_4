@@ -46,14 +46,13 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
 
   const cardsList = new Section({
     renderer: (item) => {
-
       renderCard(item)
     },
   },
     cardListSection
   );
 
-  //function render new card
+  //Function to render a new card
   function renderCard(item) {
     const card = new Card({
       data: item,
@@ -82,7 +81,15 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
 
   cardsList.renderItems(values[1]);
 
-  //Create add new place popup to add new cards
+  //Set initial user data and avatar image
+  const user = new UserInfo({
+    nameSelector: '.profile__name',
+    titleSelector: '.profile__title',
+    avatarSelector: '.profile__image'
+  })
+  user.setUserInfo(values[0])
+
+  //ADD NEW PLACE POPUP
   const addPlacePopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
     formButton: "Create",
@@ -94,14 +101,15 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
             addPlacePopup.close()
         }
         )
-        .finally()
+        .catch((err) => console.log(err))
+        .finally(() => { addPlacePopup.stopLoading() })
     }
   }
   )
   addPlacePopup.setEventListeners();
   addButton.addEventListener("click", () => { addPlacePopup.open() })
 
-  //Create popup to edit profile information 
+  //EDIT PROFILE POPUP
   const editProfilePopup = new PopupWithForm(
     {
       popupSelector: ".popup_type_edit",
@@ -130,35 +138,30 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
     editProfilePopup.open()
   })
 
-  //Set initial user data and avatar image
-  const user = new UserInfo({
-    nameSelector: '.profile__name',
-    titleSelector: '.profile__title',
-    avatarSelector: '.profile__image'
-  })
-  user.setUserInfo(values[0])
-
-  //Create confirm delete popup
-  const confirmDeletePopup = new PopupWithForm(
-    {
-      popupSelector: ".popup_type_delete",
-      formButton: "Yes",
-      handleFormSubmit: (data) => {
-        api.deleteCard(data.id)
-          .then((res) => { cardsList.removeItem(data.id), confirmDeletePopup.close() }
-          )
-          .catch((err) => console.log(err))
-          .finally(() => { confirmDeletePopup.stopLoading() })
-      }
-    })
-  confirmDeletePopup.setEventListeners();
-  function setCardId(id) {
-    confirmDeletePopup._popupElement.querySelector(".form__input_type_card-id").value = id
-  }
-
 })
 
-//Creat popup to edit avatar
+//CONFIRM DELETE POPUP
+const confirmDeletePopup = new PopupWithForm(
+  {
+    popupSelector: ".popup_type_delete",
+    formButton: "Yes",
+    handleFormSubmit: (data) => {
+      api.deleteCard(data.id)
+        .then((res) => {
+          cardsList.removeItem(data.id),
+            confirmDeletePopup.close()
+        }
+        )
+        .catch((err) => console.log(err))
+        .finally(() => { confirmDeletePopup.stopLoading() })
+    }
+  })
+confirmDeletePopup.setEventListeners();
+function setCardId(id) {
+  confirmDeletePopup._popupElement.querySelector(".form__input_type_card-id").value = id
+}
+
+//EDIT AVATAR POPUP
 const editAvatarPopup = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
   formButton: "Save",
@@ -167,22 +170,23 @@ const editAvatarPopup = new PopupWithForm({
     api.setAvatar(avatarUrl)
       .then((data) => {
         avatarImage.src = avatarUrl,
-        editAvatarPopup.close()
+          editAvatarPopup.close()
       }
       )
       .catch((err) => console.log(err))
+      .finally(() => { editAvatarPopup.stopLoading() })
   }
 
 })
 editAvatarPopup.setEventListeners();
 avatarButton.addEventListener("click", () => { editAvatarPopup.open() })
-//Create popup to preview image
+
+//PREVIEW IMAGE POPUP
 const popupImage = new PopupWithImage('.popup_type_preview');
 popupImage.setEventListeners();
 
 
-
-//Validation
+//Form Validation
 const formValidationSettings = {
   inputSelector: ".form__input",
   submitButtonSelector: ".form__button",
@@ -191,7 +195,7 @@ const formValidationSettings = {
   errorClass: "form__error_visible",
 };
 
-//Create instance of FormValidator
+//Create instances of FormValidator
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 addFormValidator.enableValidation();
 
