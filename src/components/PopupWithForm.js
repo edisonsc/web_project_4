@@ -5,13 +5,12 @@ class PopupWithForm extends Popup {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._formButton = formButton
-   
   }
-
+  
   setEventListeners() {
     this._popupElement.querySelector(".form").addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._popupElement.querySelector(".form__button").textContent = "Saving..."
+      this._popupElement.querySelector(".form__button").textContent = "Saving..."; 
       this._handleFormSubmit(this._getInputValues());
     })
     super.setEventListeners();
@@ -21,6 +20,10 @@ class PopupWithForm extends Popup {
     this._popupElement.querySelector(".form").reset();
     this._popupElement.querySelector(".form__button").textContent = this._formButton;
     super.close();
+  }
+
+  stopLoading() {
+    
   }
 
   _getInputValues() {
