@@ -2,8 +2,7 @@ class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl,
       this._headers = headers,
-      this._handleResponse = this._handleResponse.bind(this),
-      this._handleErrorResponse = this._handleErrorResponse.bind(this)
+      this._handleResponse = this._handleResponse.bind(this)
   }
 
   _handleResponse(res) {
@@ -13,17 +12,11 @@ class Api {
     return Promise.reject(`Error: ${res.status}`);
   }
 
-  _handleErrorResponse(err) {
-    console.log("Error:", err)
-  }
-
-
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       headers: this._headers,
     })
       .then(this._handleResponse)
-      .catch(this._handleErrorResponse)
   }
 
   addCard(data) {
@@ -33,7 +26,6 @@ class Api {
       body: JSON.stringify(data),
     })
       .then(this._handleResponse)
-      .catch(this._handleErrorResponse)
   }
 
   deleteCard(_id) {
@@ -45,7 +37,6 @@ class Api {
       }),
     })
     .then(this._handleResponse)
-    .catch(this._handleErrorResponse)
   }
 
   addLike(_id) {
@@ -57,7 +48,6 @@ class Api {
       }),
     })
     .then(this._handleResponse)
-    .catch(this._handleErrorResponse)
   }
 
   deleteLike(_id) {
@@ -69,7 +59,6 @@ class Api {
       }),
     })
     .then(this._handleResponse)
-    .catch(this._handleErrorResponse)
   }
 
   getUser() {
@@ -77,7 +66,6 @@ class Api {
       headers: this._headers,
     })
       .then(this._handleResponse)
-      .catch(this._handleErrorResponse)
   }
 
   setUser(name, about, avatar) {
@@ -89,7 +77,6 @@ class Api {
       })
     })
       .then(this._handleResponse)
-      .catch(this._handleErrorResponse)
   }
 
 getAvatar() {
@@ -98,7 +85,6 @@ getAvatar() {
     method: "GET",
   })
     .then(this._handleResponse)
-    .catch(this._handleErrorResponse)
 }
 
 setAvatar(avatar) {
@@ -110,10 +96,7 @@ setAvatar(avatar) {
     })
   })
     .then(this._handleResponse)
-    .catch(this._handleErrorResponse)
 }
-
-
 
 }
 
