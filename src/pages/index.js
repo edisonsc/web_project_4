@@ -187,7 +187,7 @@ const editAvatarPopup = new PopupWithForm({
 })
 editAvatarPopup.setEventListeners();
 avatarButton.addEventListener("click", () => {
-  editAvatarPopup.open(),
+    editAvatarPopup.open(),
     setDefaultButtonState(editAvatarPopup)
 })
 
