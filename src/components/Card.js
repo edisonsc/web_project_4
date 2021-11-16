@@ -9,7 +9,7 @@ class Card {
         this._handleCardClick = handleCardClick;
         this._handleLikeCard = handleLikeCard;
         this._handleRemoveCard = handleRemoveCard;
-        this._cardIsLiked = false;
+        this._cardLiked = false;
     }
 
     _getTemplate() {
@@ -45,16 +45,23 @@ class Card {
         this._element = null;
     }
 
+    _renderLikes(userId) {
+        this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
+        const isLiked = this._likes.some(like => like._id === userId) 
+        if (isLiked) {
+            this._cardLiked = true;
+        this._element.querySelector('.photo-grid__heart-icon').classList.add('photo-grid__heart-icon_active'); 
+        }
+        else {
+            this._cardLiked = false
+        this._element.querySelector('.photo-grid__heart-icon').classList.remove('photo-grid__heart-icon_active'); 
+        }
+    }
 
-    updateCount(res) { 
-
-        this._element.querySelector('.photo-grid__text').textContent = res.likes.length; 
-
-        this._cardIsLiked = !this._cardIsLiked; 
-
-        this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active') 
-
-    } 
+    updateCount(res, userId) {
+        this._likes = res.likes;
+        this._renderLikes(userId);
+    }
 
     generateCard(userId) {
         this._element = this._getTemplate();
@@ -66,20 +73,8 @@ class Card {
         this._element.querySelector('.photo-grid__image').alt = this._name;
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
-
-        this._element.querySelector('.photo-grid__text').textContent = this._likes.length; 
-
-        this._likes.forEach(like => { 
-
-            if (like._id === userId) { 
-
-                this._cardLiked = true; 
-
-                this._element.querySelector('.photo-grid__heart-icon').classList.toggle('photo-grid__heart-icon_active'); 
-
-            } 
-
-        }) 
+        
+        this._renderLikes(userId);
 
         if (this._cardOwner !== userId) {
             this._element.querySelector('.photo-grid__delete-icon').hidden = true;

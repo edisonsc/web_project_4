@@ -58,19 +58,19 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
       data: item,
       handleCardClick: (item) => { popupImage.open(item) },
       handleLikeCard: (item) => {
-        if (true) {
-          console.log(item)
-          api.deleteLike(item._cardId)
+        
+    if(item._cardLiked) {
+           api.deleteLike(item._cardId)
             .then((res) => {
-              item.updateCount(res);
+              item.updateCount(res, values[0]._id);
+      
             })
             .catch((err) => console.log(`Error: ${err}`))
-        }
-        else {
+          }
+          else {
           api.addLike(item._cardId)
             .then((res) => {
-              console.log(res)
-              item.updateCount(res)
+              item.updateCount(res, values[0]._id)
             })
             .catch((err) => console.log(`Error: ${err}`))
         }
@@ -131,7 +131,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
             profileTitle.textContent = about;
             editProfilePopup.close();
           })
-          .catch((err) => console.log(err))
+          .catch((err) => console.log(`Error: ${err}`))
           .finally(() => { editProfilePopup.stopLoading() })
       }
     })
@@ -157,7 +157,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
             cardsList.removeItem(data.id);
             confirmDeletePopup.close()
           })
-          .catch((err) => console.log(err))
+          .catch((err) => console.log(`Error: ${err}`))
           .finally(() => { confirmDeletePopup.stopLoading() })
       }
     })
@@ -166,7 +166,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
     confirmDeletePopup._popupElement.querySelector(".form__input_type_card-id").value = id
   }
 })
-  .catch((err) => console.log(err))
+  .catch((err) => console.log(`Error: ${err}`))
 
 //EDIT AVATAR POPUP
 const editAvatarPopup = new PopupWithForm({
@@ -180,7 +180,7 @@ const editAvatarPopup = new PopupWithForm({
           editAvatarPopup.close()
       }
       )
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(`Error: ${err}`))
       .finally(() => { editAvatarPopup.stopLoading() })
   }
 
