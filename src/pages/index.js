@@ -58,16 +58,16 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
       data: item,
       handleCardClick: (item) => { popupImage.open(item) },
       handleLikeCard: (item) => {
-        
-    if(item._cardLiked) {
-           api.deleteLike(item._cardId)
+
+        if (item._cardLiked) {
+          api.deleteLike(item._cardId)
             .then((res) => {
               item.updateCount(res, values[0]._id);
-      
+
             })
             .catch((err) => console.log(`Error: ${err}`))
-          }
-          else {
+        }
+        else {
           api.addLike(item._cardId)
             .then((res) => {
               item.updateCount(res, values[0]._id)

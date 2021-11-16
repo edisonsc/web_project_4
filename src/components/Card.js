@@ -47,14 +47,14 @@ class Card {
 
     _renderLikes(userId) {
         this._element.querySelector('.photo-grid__text').textContent = this._likes.length;
-        const isLiked = this._likes.some(like => like._id === userId) 
+        const isLiked = this._likes.some(like => like._id === userId)
         if (isLiked) {
             this._cardLiked = true;
-        this._element.querySelector('.photo-grid__heart-icon').classList.add('photo-grid__heart-icon_active'); 
+            this._element.querySelector('.photo-grid__heart-icon').classList.add('photo-grid__heart-icon_active');
         }
         else {
             this._cardLiked = false
-        this._element.querySelector('.photo-grid__heart-icon').classList.remove('photo-grid__heart-icon_active'); 
+            this._element.querySelector('.photo-grid__heart-icon').classList.remove('photo-grid__heart-icon_active');
         }
     }
 
@@ -73,7 +73,7 @@ class Card {
         this._element.querySelector('.photo-grid__image').alt = this._name;
 
         this._element.querySelector('.photo-grid__title').textContent = this._name;
-        
+
         this._renderLikes(userId);
 
         if (this._cardOwner !== userId) {
