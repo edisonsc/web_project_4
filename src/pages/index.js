@@ -24,7 +24,6 @@ const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const avatarButton = document.querySelector(".profile__avatar-button");
 
-
 //card List Section
 const cardListSection = ".photo-grid";
 
@@ -32,6 +31,11 @@ const cardListSection = ".photo-grid";
 const avatarImage = document.querySelector(".profile__image");
 const profileName = document.querySelector(".profile__name");
 const profileTitle = document.querySelector(".profile__title")
+
+//setDefaultButtonState
+function setDefaultButtonState(popup) {
+  popup._popupElement.querySelector('.form__button').classList.add('form__button_disabled')
+}
 
 const api = new Api(config);
 
@@ -54,17 +58,18 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
       data: item,
       handleCardClick: (item) => { popupImage.open(item) },
       handleLikeCard: (item) => {
-        console.log(item)
-        if (item._cardIsLiked) {
+        if (true) {
+          console.log(item)
           api.deleteLike(item._cardId)
             .then((res) => {
-              item.updateCount(res)
+              item.updateCount(res);
             })
             .catch((err) => console.log(`Error: ${err}`))
         }
         else {
           api.addLike(item._cardId)
             .then((res) => {
+              console.log(res)
               item.updateCount(res)
             })
             .catch((err) => console.log(`Error: ${err}`))
@@ -105,8 +110,12 @@ Promise.all([api.getUser(), api.getInitialCards()]).then((values) => {
     }
   }
   )
+
   addPlacePopup.setEventListeners();
-  addButton.addEventListener("click", () => { addPlacePopup.open() })
+  addButton.addEventListener("click", () => {
+    setDefaultButtonState(addPlacePopup),
+      addPlacePopup.open()
+  })
 
   //EDIT PROFILE POPUP
   const editProfilePopup = new PopupWithForm(
@@ -177,7 +186,10 @@ const editAvatarPopup = new PopupWithForm({
 
 })
 editAvatarPopup.setEventListeners();
-avatarButton.addEventListener("click", () => { editAvatarPopup.open() })
+avatarButton.addEventListener("click", () => {
+  editAvatarPopup.open(),
+    setDefaultButtonState(editAvatarPopup)
+})
 
 //PREVIEW IMAGE POPUP
 const popupImage = new PopupWithImage('.popup_type_preview');
