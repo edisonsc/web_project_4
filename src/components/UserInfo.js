@@ -1,5 +1,5 @@
 class UserInfo {
-  constructor({ nameSelector, titleSelector, avatarSelector} ) {
+  constructor({ nameSelector, titleSelector, avatarSelector }) {
     this._nameElement = document.querySelector(nameSelector);
     this._titleElement = document.querySelector(titleSelector);
     this._avatarElement = document.querySelector(avatarSelector);
@@ -22,11 +22,11 @@ class UserInfo {
   }
 
   getId() {
-    return this._id
+    return this._id;
   }
 
   setAvatar(src) {
-    this._avatarElement.src = src
+    this._avatarElement.src = src;
   }
 }
 
