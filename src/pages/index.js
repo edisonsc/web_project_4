@@ -78,14 +78,14 @@ function renderCard(item) {
         api
           .deleteLike(item._cardId)
           .then((res) => {
-            item.updateCount(res, user._id);
+            item.updateCount(res, user.getId());
           })
           .catch((err) => console.log(`Error: ${err}`));
       } else {
         api
           .addLike(item._cardId)
           .then((res) => {
-            item.updateCount(res, user._id);
+            item.updateCount(res, user.getId());
           })
           .catch((err) => console.log(`Error: ${err}`));
       }
@@ -95,7 +95,7 @@ function renderCard(item) {
     },
     cardSelector: ".card-template",
   });
-  const cardElement = card.generateCard(user._id);
+  const cardElement = card.generateCard(user.getId());
   cardsList.addItem(cardElement, card._cardId);
 }
 
@@ -189,7 +189,8 @@ const editAvatarPopup = new PopupWithForm({
     api
       .setAvatar(avatarUrl)
       .then((data) => {
-        (user._avatarElement.src = avatarUrl), editAvatarPopup.close();
+        user.setAvatar(avatarUrl);
+        editAvatarPopup.close();
       })
       .catch((err) => console.log(`Error: ${err}`))
       .finally(() => {
@@ -199,7 +200,8 @@ const editAvatarPopup = new PopupWithForm({
 });
 editAvatarPopup.setEventListeners();
 avatarButton.addEventListener("click", () => {
-  editAvatarPopup.open(), setDefaultButtonState(editAvatarPopup);
+  editAvatarPopup.open();
+  setDefaultButtonState(editAvatarPopup);
 });
 
 //PREVIEW IMAGE POPUP
