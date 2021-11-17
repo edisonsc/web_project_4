@@ -20,6 +20,14 @@ class UserInfo {
     this._avatarElement.src = res.avatar;
     this._id = res._id;
   }
+
+  getId() {
+    return this._id
+  }
+
+  setAvatar(src) {
+    this._avatarElement.src = src
+  }
 }
 
 export default UserInfo;
